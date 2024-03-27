@@ -4,7 +4,7 @@ import '../App.css';
 const Forecast = () => {
   const [forecastData, setForecastData] = useState(null);
 
-  const apiKey = 'dd8e3a1525d8c554ba445de6cd6460cd';
+  const apiKey = '';
 
   useEffect(() => {
     const fetchData = async () => {
