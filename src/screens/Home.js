@@ -21,7 +21,7 @@ const Home = () => {
   const latestData = getLatestData();
 
   // Simuloitu hälytystila
-  const alert = false;
+  const alert = true;
 
   return (
     <div>
