@@ -5,6 +5,7 @@ const Forecast = () => {
   const [forecastData, setForecastData] = useState(null);
 
   const apiKey = '';
+  //api key: dd8e3a1525d8c554ba445de6cd6460cd
 
   useEffect(() => {
     const fetchData = async () => {
