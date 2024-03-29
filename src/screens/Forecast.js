@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
 
+
 const Forecast = () => {
   const [forecastData, setForecastData] = useState(null);
 
-  const apiKey = '';
+  const apiKey = 'dd8e3a1525d8c554ba445de6cd6460cd'
 
   useEffect(() => {
     const fetchData = async () => {
