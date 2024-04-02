@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'
 import '../App.css'; 
+
 
 const Forecast = () => {
   const [forecastData, setForecastData] = useState(null);
 
-  const apiKey = '';
-  //api key: dd8e3a1525d8c554ba445de6cd6460cd
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-            `http://api.openweathermap.org/data/2.5/forecast?id=643492&appid=${apiKey}&units=metric`
+    
+         const response = await fetch(
+            `http://localhost:8000/forecast`
         );
         const data = await response.json();
         setForecastData(data);
@@ -21,6 +22,7 @@ const Forecast = () => {
     };
 
     fetchData();
+
   }, []);
 
   const formatDate = (dateString) => {
