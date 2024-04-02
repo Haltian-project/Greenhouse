@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home</h1>
+      {/* <h1>Home</h1>
       <button>
         <Link to="/charts">Go to Charts</Link>
       </button>
@@ -35,7 +35,10 @@ const Home = () => {
       <button>
         <Link to="/yet-another-page">Go to Yet Another Page</Link>
       </button>
-      <h1>Latest Data</h1>
+
+      <h1>Latest data:</h1> */}
+
+
       <div className="Home-data-container">
         <div className="Home-data-item" style={{ backgroundColor: 'lightblue' }}>
           <FaThermometer size={30} />
@@ -57,9 +60,10 @@ const Home = () => {
           <FaSmog size={30} />
           <p>CO2: {latestData.CO2} ppm</p>
         </div>
-      </div>
-      <h1>Alerts</h1>
-      <div className="Home-data-container">
+        <div className="Home-data-container">
+
+
+
         <div className="Home-data-item">
           {alert ? (
             <>
@@ -69,10 +73,13 @@ const Home = () => {
           ) : (
             <>
               <FaRegLaughBeam size={30} />
-              <p>No alerts</p>
+              <p>No water leak</p>
             </>
           )}
         </div>
+      </div>
+      {/* <h1>Alerts:</h1> */}
+      
       </div>
     </div>
   );
