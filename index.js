@@ -1,4 +1,4 @@
-const PORT = 8000
+const PORT = 5000
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
@@ -39,4 +39,4 @@ app.get('/forecast',(req,res) =>{
 
 
 
-app.listen(8000, ()=> console.log(`Server is running on port ${PORT}`))
+app.listen(5000, ()=> console.log(`Server is running on port ${PORT}`))
