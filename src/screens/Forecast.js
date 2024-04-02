@@ -6,7 +6,6 @@ import '../App.css';
 const Forecast = () => {
   const [forecastData, setForecastData] = useState(null);
 
-  
 
   useEffect(() => {
     const fetchData = async () => {

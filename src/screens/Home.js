@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { FaThermometer, FaTint, FaRegLaughBeam, FaBalanceScale, FaCloud, FaExclamationTriangle, FaSmog } from 'react-icons/fa'; // Tuodaan ikonit FontAwesome-kirjastosta
-import exampleData from '../exampleData'; // Tuodaan esimerkkidata
+import { FaThermometer, FaTint, FaRegLaughBeam, FaBalanceScale, FaCloud, FaExclamationTriangle, FaSmog } from 'react-icons/fa'; // Importing icons from FontAwesome library
+import exampleData from '../exampleData'; // Importing example data
 
 const Home = () => {
-  // Funktio viimeisimmän datan hakemiseen
+  // Function to get the latest data
   const getLatestData = () => {
     const latestData = {
       temperature: exampleData.temp.datasets[0].data.slice(-1)[0],
@@ -17,10 +17,10 @@ const Home = () => {
     return latestData;
   };
 
-  // Haetaan viimeisimmät tiedot
+  // Get the latest data
   const latestData = getLatestData();
 
-  // Simuloitu hälytystila
+  // Simulated alert state
   const alert = false;
 
   return (
@@ -35,29 +35,35 @@ const Home = () => {
       <button>
         <Link to="/yet-another-page">Go to Yet Another Page</Link>
       </button>
+
       <h1>Latest data:</h1> */}
+
+
       <div className="Home-data-container">
-        <div className="Home-data-item">
+        <div className="Home-data-item" style={{ backgroundColor: 'lightblue' }}>
           <FaThermometer size={30} />
           <p>Temperature: {latestData.temperature} °C</p>
         </div>
-        <div className="Home-data-item">
+        <div className="Home-data-item" style={{ backgroundColor: 'lightgreen' }}>
           <FaCloud size={30} />
           <p>Outside Temperature: {latestData.outsideTemperature} °C</p>
         </div>
-        <div className="Home-data-item">
+        <div className="Home-data-item" style={{ backgroundColor: 'lightcoral' }}>
           <FaTint size={30} />
           <p>Humidity: {latestData.humidity} %</p>
         </div>
-        <div className="Home-data-item">
+        <div className="Home-data-item" style={{ backgroundColor: 'lightgoldenrodyellow' }}>
           <FaBalanceScale size={30} />
           <p>pH: {latestData.pH}</p>
         </div>
-        <div className="Home-data-item">
+        <div className="Home-data-item" style={{ backgroundColor: 'lightsalmon' }}>
           <FaSmog size={30} />
           <p>CO2: {latestData.CO2} ppm</p>
         </div>
         <div className="Home-data-container">
+
+
+
         <div className="Home-data-item">
           {alert ? (
             <>
