@@ -1,4 +1,4 @@
-const PORT = 5000
+const PORT = 8000
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
@@ -13,6 +13,26 @@ app.use(express.json())
 app.get('/',(req,res) =>{
     res.json('hi')
 })
+
+app.listen(PORT, () => console.log(`Server running on port ${8000}`));
+
+const mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/test_db", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const Item = require("./models/Item"); // Create the Item model
+
+app.get("/api/items", async (req, res) => {
+  try {
+    const items = await Item.find();
+    res.json(items);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
 
 
 app.get('/forecast',(req,res) =>{
@@ -39,4 +59,4 @@ app.get('/forecast',(req,res) =>{
 
 
 
-app.listen(5000, ()=> console.log(`Server is running on port ${PORT}`))
+app.listen(5000, ()=> console.log(`Server is running on ports 5000 and ${PORT} type `))
