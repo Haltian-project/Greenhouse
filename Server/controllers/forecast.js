@@ -1,21 +1,8 @@
-const PORT = 8000
-const express = require('express')
-const cors = require('cors')
-const axios = require('axios')
-require ('dotenv').config()
-const app = express()
-app.use(cors())
-app.use(express.json())
+import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+dotenv.config();
 
-
-
-
-app.get('/',(req,res) =>{
-    res.json('hi')
-})
-
-
-app.get('/forecast',(req,res) =>{
+export const getForecast = (req,res) =>{
     const fetchData = async () => {
         try {
           const apiKey = process.env.OPENWEATHER_API_KEY; // Store your API key in environment variables
@@ -32,11 +19,4 @@ app.get('/forecast',(req,res) =>{
       };
   
       fetchData();
-})
-
-
-
-
-
-
-app.listen(8000, ()=> console.log(`Server is running on port ${PORT}`))
+}
