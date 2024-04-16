@@ -12,7 +12,7 @@ const Forecast = () => {
       try {
     
          const response = await fetch(
-            `http://localhost:8000/forecast`
+            `http://localhost:3000/forecast`
         );
         const data = await response.json();
         setForecastData(data);

@@ -11,20 +11,23 @@ app.use(express.json())
 
 
 app.get('/',(req,res) =>{
-    res.json('hi')
+    res.json('This is forecast')
 })
+
+
 
 app.listen(PORT, () => console.log(`Server running on port ${8000}`));
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/test_db", {
+mongoose.connect("mongodb+srv://admin:admin@haltian.6zshdbe.mongodb.net/", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  
 });
 
 const Item = require("./models/Item"); // Create the Item model
 
-app.get("/api/items", async (req, res) => {
+app.get("/db/items", async (req, res) => {
   try {
     const items = await Item.find();
     res.json(items);
@@ -59,4 +62,4 @@ app.get('/forecast',(req,res) =>{
 
 
 
-app.listen(5000, ()=> console.log(`Server is running on ports 5000 and ${PORT} type `))
+app.listen(5000, ()=> console.log(`Server is running on ${PORT}`))

@@ -6,6 +6,9 @@ import Charts from './screens/Charts';
 import Forecast from './screens/Forecast';
 import Navbar from './components/Navbar';
 
+
+
+
 const App = () => {
   return (
     <>
@@ -18,6 +21,8 @@ const App = () => {
             <Route path='/Home' element={<Home/>} /> 
             <Route path='/Charts' element={<Charts/>} />
             <Route path='/Forecast' element={<Forecast/>} />
+            
+            
           </Routes>
           </div>
         </Router>
