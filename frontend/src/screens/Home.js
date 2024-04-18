@@ -109,33 +109,33 @@ const Home = () => {
       </div>
 
       <h2>Outside:</h2>
-<div className="Home-data-container">
-  <div className="Home-data-item">
-    <button>
-      <Link to="/forecast">
-        <FaThermometer size={30} />
-        <p>Outside Temperature: {weatherData ? weatherData.main.temp : 'Loading...'} °C</p>
-      </Link>
-    </button>
-  </div>
-  <div className="Home-data-item">
-    <button>
-      <Link to="/forecast">
-        <FaTint size={30} />
-        <p>Outside Humidity: {weatherData ? weatherData.main.humidity : 'Loading...'} %</p>
-      </Link>
-    </button>
-  </div>
-  <div className="Home-data-item">
-    <button>
-      <Link to="/forecast">
-        <FaWind size={30} />
-        <p>Outside Airpressure: {weatherData ? weatherData.main.pressure : 'Loading...'} hpa</p>
-      </Link>
-    </button>
-  </div>
-</div>
-    </div>
+      <div className="Home-data-container">
+        <div className="Home-data-item">
+          <button>
+            <Link to="/forecast">
+              <FaThermometer size={30} />
+              <p>Outside Temperature: {weatherData ? weatherData.main.temp : 'Loading...'} °C</p>
+            </Link>
+          </button>
+        </div>
+        <div className="Home-data-item">
+          <button>
+            <Link to="/forecast">
+              <FaTint size={30} />
+              <p>Outside Humidity: {weatherData ? weatherData.main.humidity : 'Loading...'} %</p>
+            </Link>
+          </button>
+        </div>
+        <div className="Home-data-item">
+          <button>
+            <Link to="/forecast">
+              <FaWind size={30} />
+              <p>Outside Airpressure: {weatherData ? weatherData.main.pressure : 'Loading...'} hpa</p>
+            </Link>
+          </button>
+         </div>
+        </div>
+      </div>
   );
 };
 
