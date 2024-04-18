@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import forecast from './routers/forecast.js';
+import weather from './routers/weather.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
 app.use('/forecast', forecast);
+app.use('/weather', weather);
 
 mongoose
   .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })

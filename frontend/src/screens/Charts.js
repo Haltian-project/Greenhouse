@@ -1,55 +1,65 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { Line } from 'react-chartjs-2';
-import exampleData from '../exampleData'; // Tuodaan esimerkkidata
+import exampleData from '../exampleData'; 
 import { Chart } from "chart.js/auto";
 
 
 
 const Charts = () => {
-  const [showTemp, setShowTemp] = useState(false);
-  const [showOutsideTemp, setShowOutsideTemp] = useState(false);
-  const [showHumidity, setShowHumidity] = useState(false);
-  const [showPH, setShowPH] = useState(false);
-  const [showCO2, setShowCO2] = useState(false);
+  const [showInsideTemp, setShowInsideTemp] = useState(false);
+  const [showInsideHumidity, setShowInsideHumidity] = useState(false);
+  const [showInsideAirPressure, setShowInsideAirPressure] = useState(false);
+  const [showLight, setShowLight] = useState(false);
+  const [showCO2, setCO2] = useState(false);
+  const [showLightIntensity, setShowLightIntensity] = useState(false);
   const [showAllCharts, setShowAllCharts] = useState(false);
 
   return (
     <div>
       <h1>Green House</h1>
-      <button onClick={() => setShowTemp(!showTemp)}>
-        {showTemp ? 'Hide Temp Chart' : 'Show Temp Chart'}
+      <h2>Inside charts:</h2>
+      <button onClick={() => setShowInsideTemp(!showInsideTemp)}>
+        {showInsideTemp ? 'Hide Inside Temp Chart' : 'Show Inside Temp Chart'}
       </button>
-      {showTemp && (
+      {showInsideTemp && (
         <div className="chart-container">
-          <Line data={exampleData.temp} /> 
+          <Line data={exampleData.insideTemperature} /> 
         </div>
       )}
-      <button onClick={() => setShowOutsideTemp(!showOutsideTemp)}>
-        {showOutsideTemp ? 'Hide Outside Temp Chart' : 'Show Outside Temp Chart'}
+      <button onClick={() => setShowInsideHumidity(!showInsideHumidity)}>
+        {showInsideHumidity ? 'Hide Inside Humidity Chart' : 'Show Inside Humidity Chart'}
       </button>
-      {showOutsideTemp && (
+      {showInsideHumidity && (
         <div className="chart-container">
-          <Line data={exampleData.outsideTemp} /> 
+          <Line data={exampleData.insideHumidity} /> 
         </div>
       )}
-      <button onClick={() => setShowHumidity(!showHumidity)}>
-        {showHumidity ? 'Hide Humidity Chart' : 'Show Humidity Chart'}
+      <button onClick={() => setShowInsideAirPressure(!showInsideAirPressure)}>
+        {showInsideAirPressure ? 'Hide Inside Air Pressure Chart' : 'Show Inside Air Pressure Chart'}
       </button>
-      {showHumidity && (
+      {showInsideAirPressure && (
         <div className="chart-container">
-          <Line data={exampleData.humidity} /> 
+          <Line data={exampleData.insideAirPressure} /> 
         </div>
       )}
-      <button onClick={() => setShowPH(!showPH)}>
-        {showPH ? 'Hide PH Chart' : 'Show PH Chart'}
+      <button onClick={() => setShowLight(!showLight)}>
+        {showLight ? 'Hide Light Chart' : 'Show Light Chart'}
       </button>
-      {showPH && (
+      {showLight && (
         <div className="chart-container">
-          <Line data={exampleData.ph} /> 
+          <Line data={exampleData.light} /> 
         </div>
       )}
-      <button onClick={() => setShowCO2(!showCO2)}>
+      <button onClick={() => setShowLightIntensity(!showLightIntensity)}>
+        {showLightIntensity ? 'Hide Light Intensity Chart' : 'Show Light Intensity Chart'}
+      </button>
+      {showLightIntensity && (
+        <div className="chart-container">
+          <Line data={exampleData.lightIntensity} /> 
+        </div>
+      )}
+      <button onClick={() => setCO2(!showCO2)}>
         {showCO2 ? 'Hide CO2 Chart' : 'Show CO2 Chart'}
       </button>
       {showCO2 && (
@@ -57,6 +67,9 @@ const Charts = () => {
           <Line data={exampleData.co2} /> 
         </div>
       )}
+      
+      
+      <h2>All charts:</h2>
       <button onClick={() => setShowAllCharts(!showAllCharts)}>
         {showAllCharts ? 'Hide All Charts' : 'Show All Charts'}
       </button>
@@ -64,13 +77,14 @@ const Charts = () => {
         <div className="chart-container">
           <Line
             data={{
-              labels: exampleData.temp.labels,
+              labels: exampleData.insideTemperature.labels,
               datasets: [
-                { ...exampleData.temp.datasets[0], label: 'Temp' },
-                { ...exampleData.outsideTemp.datasets[0], label: 'Outside Temp' },
-                { ...exampleData.humidity.datasets[0], label: 'Humidity' },
-                { ...exampleData.ph.datasets[0], label: 'PH' },
+                { ...exampleData.insideTemperature.datasets[0], label: 'Inside Temp' },
+                { ...exampleData.insideHumidity.datasets[0], label: 'Inside Humidity' },
+                { ...exampleData.insideAirPressure.datasets[0], label: 'Inside Air Pressure' },
+                { ...exampleData.light.datasets[0], label: 'Light' },
                 { ...exampleData.co2.datasets[0], label: 'CO2' },
+                { ...exampleData.lightIntensity.datasets[0], label: 'Light Intensity' },
               ],
             }}
           />
