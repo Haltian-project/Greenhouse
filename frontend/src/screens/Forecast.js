@@ -1,0 +1,68 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios'
+import '../App.css'; 
+
+
+const Forecast = () => {
+  const [forecastData, setForecastData] = useState(null);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+    
+         const response = await fetch(
+            `http://localhost:8000/forecast`
+        );
+        const data = await response.json();
+        setForecastData(data);
+      } catch (error) {
+        console.error('Error fetching weather forecast:', error);
+      }
+    };
+
+    fetchData();
+
+  }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${day}.${month}.  ${hours}:${minutes}`;
+  };
+
+  return (
+    <div className="forecast-container">
+      <h2 className="forecast-heading">Weather Forecast</h2>
+      {forecastData ? (
+        <div>
+          {forecastData.city ? (
+            <div>
+              <p className="forecast-city">City: {forecastData.city.name}</p>
+              <p className="forecast-country">Country: {forecastData.city.country}</p>
+            </div>
+          ) : (
+            <p>City information not available</p>
+          )}
+          <h3 className="forecast-subheading">Forecast:</h3>
+          <ul className="forecast-list">
+            {forecastData.list && forecastData.list.map((item, index) => (
+              <li key={index} className="forecast-item">
+                 {formatDate(item.dt_txt)}: Temperature: {item.main.temp} °C , Humidity: 
+                 {item.main.humidity}% , Pressure: {item.main.pressure} hPa , 
+                 Weather: {item.weather[0].description}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
+};
+
+export default Forecast;
