@@ -19,7 +19,7 @@ app.use('/forecast', forecast);
 app.use('/weather', weather);
 
 mongoose
-  .connect("mongodb+srv://admin:1234pwd@cluster0.dravxy4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => {
