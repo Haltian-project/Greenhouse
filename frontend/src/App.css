@@ -71,7 +71,6 @@ a {
   text-align: center;
 }
 
-
 .Home-data-item svg {
   margin-bottom: 5px;
   color: #000000;
@@ -86,6 +85,7 @@ a {
 .Home-data-item:hover {
   color: #ddd;
 }
+
 .navbar {
   background-color: #2bb43d;
   padding: 15px 0;
@@ -191,3 +191,27 @@ button:hover {
   margin-bottom: 0;
 }
 
+.PriceContainer {
+  margin-top: 20px;
+}
+
+.PriceTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.PriceTable th,
+.PriceTable td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.PriceTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+}
+
+.PriceTable td {
+  text-align: center;
+}

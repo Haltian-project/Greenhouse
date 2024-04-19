@@ -17,8 +17,8 @@ const Navbar = () => {
           <Link to="/forecast" className="nav-link">
             Weather forecast
           </Link>
-          <Link to="/yet-another-page" className="nav-link">
-            Yet Another Page
+          <Link to="/price" className="nav-link">
+            Electricity Price
           </Link>
         </div>
       </div>
