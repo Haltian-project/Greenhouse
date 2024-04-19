@@ -1,6 +1,8 @@
+require('dotenv').config({ path: `${__dirname}/../.env` });
 const mqtt = require('mqtt');
 const fs = require('fs');
 const path = require('path');
+const { saveDataToMongoDB } = require('../utils/db.cjs');
 
 const keyPath = path.resolve(__dirname, '../certificates/sales-cloudext-prfi002024oamk1.key');
 const certPath = path.resolve(__dirname, '../certificates/sales-cloudext-prfi002024oamk1.pem');
@@ -34,9 +36,11 @@ client.on('connect', () => {
 });
 
 // Handle message event
-client.on('message', (topic, message) => {
+client.on('message', async (topic, message) => {
     console.log('Received message:', message.toString());
     // Handle the received message here
+    const data = JSON.parse(message.toString());
+    await saveDataToMongoDB(data); // Call the function to save data to the database
 });
 
 // Handle error event
