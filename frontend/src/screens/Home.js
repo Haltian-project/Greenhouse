@@ -39,7 +39,7 @@ const Home = () => {
     fetchData();
 
   }, []);
-  
+
   
   return (
     <div>
@@ -51,7 +51,7 @@ const Home = () => {
         <Link to="/forecast">See weather forecast</Link>
       </button>
       <button>
-        <Link to="/yet-another-page">Go to Yet Another Page</Link>
+        <Link to="/price">Electricity price</Link>
       </button>
 
       <h1>Latest data:</h1> 

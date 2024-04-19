@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import forecast from './routers/forecast.js';
 import weather from './routers/weather.js';
+import price from './routers/price.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -17,6 +18,7 @@ app.use(cors());
 
 app.use('/forecast', forecast);
 app.use('/weather', weather);
+app.use('/price', price);
 
 mongoose
   .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })

@@ -18,7 +18,7 @@ const Charts = () => {
   return (
     <div>
       <h1>Green House</h1>
-      <h2>Inside charts:</h2>
+      
       <button onClick={() => setShowInsideTemp(!showInsideTemp)}>
         {showInsideTemp ? 'Hide Inside Temp Chart' : 'Show Inside Temp Chart'}
       </button>
