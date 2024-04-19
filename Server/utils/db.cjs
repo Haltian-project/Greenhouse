@@ -1,12 +1,12 @@
 require('dotenv').config({ path: `${__dirname}/../.env` });
 const { MongoClient } = require('mongodb');
 
-const mongoURL = process.env.MongoDB_URL;
+const mongoURI = process.env.MongoDB_URI;
 const dbName = 'mqtt_data';
 
 async function saveDataToMongoDB(data) {
     try {
-        const client = await MongoClient.connect(mongoURL);
+        const client = await MongoClient.connect(mongoURI);
         const db = client.db(dbName);
         const collection = db.collection('data');
 
