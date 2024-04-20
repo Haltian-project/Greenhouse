@@ -5,7 +5,7 @@ import forecast from './routers/forecast.js';
 import weather from './routers/weather.js';
 import price from './routers/price.js';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import { client } from './services/mqtt.cjs';
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -20,8 +20,13 @@ app.use('/forecast', forecast);
 app.use('/weather', weather);
 app.use('/price', price);
 
+// MQTT client
+client.on('connect', () => {
+  console.log('Connected to MQTT broker');
+});
+
 mongoose
-  .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(URI)
   .then(() => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => {
@@ -31,4 +36,3 @@ mongoose
   .catch((error) => {
     console.error('Error connecting to MongoDB:', error.message);
   });
-

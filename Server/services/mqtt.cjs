@@ -15,8 +15,8 @@ const options = {
     rejectUnauthorized: false,
 };
 
-// MQTT topic to subscribe to
-const topic = 'cloudext/json/pr/fi/prfi002024oamk1/#'; // Topic
+// MQTT topic
+const topic = 'cloudext/json/pr/fi/prfi002024oamk1/#';
 
 // Create a client instance
 const client = mqtt.connect(brokerUrl, options);
@@ -52,3 +52,5 @@ client.on('error', (err) => {
 client.on('close', () => {
     console.log('Disconnected from MQTT broker');
 });
+
+module.exports = { client };
