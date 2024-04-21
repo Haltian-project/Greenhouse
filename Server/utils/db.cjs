@@ -11,7 +11,7 @@ async function saveDataToMongoDB(data) {
         const collection = db.collection('data');
 
         await collection.insertOne(data);
-        console.log('Data saved to MongoDB:', data);
+        console.log('Data saved to MongoDB');
 
         client.close();
     } catch (err) {
