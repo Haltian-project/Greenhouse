@@ -34,6 +34,7 @@ a {
   text-decoration: none; 
   color: black; 
 }
+
 .data-container {
   margin-top: 20px;
 }
@@ -140,6 +141,8 @@ button {
 button:hover {
   background-color: #ddd;
 }
+
+
 
 .chart-container {
   margin-bottom: 50px;
