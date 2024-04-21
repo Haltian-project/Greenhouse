@@ -58,4 +58,18 @@ async function saveDataToMongoDB(data) {
     }
 }
 
-module.exports = { saveDataToMongoDB };
+//function to get data from MongoDB
+async function getDataFromMongoDB() {
+    try {
+        const client = await MongoClient.connect(mongoURI);
+        const db = client.db(dbName);
+        const collection = db.collection('sensor_data');
+        const data = await collection.find({}).toArray();
+        client.close();
+        return data;
+    } catch (err) {
+        console.error('Error getting data from MongoDB:', err);
+    }
+}
+
+module.exports = { saveDataToMongoDB, getDataFromMongoDB };
