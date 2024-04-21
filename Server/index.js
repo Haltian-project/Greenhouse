@@ -6,6 +6,7 @@ import weather from './routers/weather.js';
 import price from './routers/price.js';
 import mongoose from 'mongoose';
 import { client } from './services/mqtt.cjs';
+import sensorData from './routers/sensorData.js';
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -16,9 +17,11 @@ app.use(bodyParser.json({ limit: '30mb' }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors());
 
+
 app.use('/forecast', forecast);
 app.use('/weather', weather);
 app.use('/price', price);
+app.use('/sensorData', sensorData);
 
 // MQTT client
 client.on('connect', () => {
