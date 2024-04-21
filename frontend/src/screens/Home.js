@@ -45,7 +45,7 @@ const Home = () => {
     <div>
      <h1>Home</h1>
       <button>
-        <Link to="/charts">Go to Charts</Link>
+        <Link to="/charts"> Go to Charts</Link>
       </button>
       <button>
         <Link to="/forecast">See weather forecast</Link>
@@ -102,7 +102,7 @@ const Home = () => {
           <button>
             <Link to="/charts">
               <FaRegLightbulb size={30} />
-              <p>Light intensity: {latestData.lightIntensity} cd/m^2?</p>
+              <p>Light intensity: {latestData.lightIntensity} lux?</p>
             </Link>
           </button>
         </div>
