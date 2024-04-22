@@ -68,12 +68,56 @@ async function getDataFromMongoDB() {
         const client = await MongoClient.connect(mongoURI);
         const db = client.db(dbName);
         const collection = db.collection('sensor_data');
-        const data = await collection.find({}).toArray();
+
+        // Query to find the 10 latest documents with the desired fields
+        const query = {
+            $or: [
+                { temp: { $exists: true } },
+                { carbonDioxide: { $exists: true } },
+                { humd: { $exists: true } },
+                { airp: { $exists: true } },
+                { lghtint: { $exists: true } },
+                { lght: { $exists: true } }
+            ]
+        };
+
+        // Sort by descending order of insertion (_id) to get the latest documents first
+        const options = { sort: { _id: -1 }, limit: 25 };
+
+        // Find the 20 latest documents
+        const latestDocuments = await collection.find(query, options).toArray();
+        let latestData = {};
+
+        // Loop through each field and find the latest value
+        const fields = ['temp', 'carbonDioxide', 'humd', 'airp', 'lghtint', 'lght'];
+        fields.forEach(field => {
+            // Find the latest value for the field
+            const latestValue = findLatestValue(latestDocuments, field);
+            latestData[field] = latestValue;
+        });
+
+        // Close the database connection
         client.close();
-        return data;
+
+        console.log('Data obtained');
+
+        return latestData;
     } catch (err) {
         console.error('Error getting data from MongoDB:', err);
+        return null;
     }
+}
+
+// Helper function to find the latest value for a field
+function findLatestValue(documents, field) {
+    let latestValue = null;
+    for (const doc of documents) {
+        if (doc[field] !== undefined) {
+            latestValue = doc[field];
+            break;
+        }
+    }
+    return latestValue;
 }
 
 module.exports = { saveDataToMongoDB, getDataFromMongoDB };

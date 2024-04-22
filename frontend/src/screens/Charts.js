@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import '../App.css';
 import { Line } from 'react-chartjs-2';
 import exampleData from '../exampleData'; 
-import { Chart } from "chart.js/auto";
-
-
 
 const Charts = () => {
   const [showInsideTemp, setShowInsideTemp] = useState(false);
