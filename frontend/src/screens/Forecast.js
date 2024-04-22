@@ -1,68 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
 
+const Price = () => {
+    const [priceData, setPriceData] = useState(null);
 
-const Forecast = () => {
-  const [forecastData, setForecastData] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(
+                    `http://localhost:8000/price`
+                );
+                const data = await response.json();
+                setPriceData(data);
+            } catch (error) {
+                console.error('Error fetching electricity price:', error);
+            }
+        };
 
+        fetchData();
+    }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-    
-         const response = await fetch(
-            `http://localhost:3000/forecast`
-        );
-        const data = await response.json();
-        setForecastData(data);
-      } catch (error) {
-        console.error('Error fetching weather forecast:', error);
-      }
+    const formatDate2 = (dateString) => {
+        const date = new Date(dateString);
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const formattedDate = date.toLocaleDateString('en-GB', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        return `${formattedDate} ${hours}:${minutes}`;
     };
 
-    fetchData();
+    const formatPrice = (value) => {
+        // Convert the price to cents per kWh with two decimal places
+        const centsPerKWh = (value / 10).toFixed(2); // 1 MWh = 1000 kWh, so divide the value by 10
+        return centsPerKWh;
+    }
 
-  }, []);
+    const formatPriceWithVAT = (value) => {
+        // Convert the price to cents per kWh with two decimal places
+        const centsPerKWh = (value / 10).toFixed(2); // 1 MWh = 1000 kWh, so divide the value by 10
+        // Add VAT 
+        const priceWithVAT = (centsPerKWh * 1.24).toFixed(2); // Assuming VAT is 24%
+        return priceWithVAT;
+    }
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${day}.${month}.  ${hours}:${minutes}`;
-  };
-
-  return (
-    <div className="forecast-container">
-      <h2 className="forecast-heading">Weather Forecast</h2>
-      {forecastData ? (
-        <div>
-          {forecastData.city ? (
-            <div>
-              <p className="forecast-city">City: {forecastData.city.name}</p>
-              <p className="forecast-country">Country: {forecastData.city.country}</p>
-            </div>
-          ) : (
-            <p>City information not available</p>
-          )}
-          <h3 className="forecast-subheading">Forecast:</h3>
-          <ul className="forecast-list">
-            {forecastData.list && forecastData.list.map((item, index) => (
-              <li key={index} className="forecast-item">
-                 {formatDate(item.dt_txt)}: Temperature: {item.main.temp} °C , Humidity: 
-                 {item.main.humidity}% , Pressure: {item.main.pressure} hPa , 
-                 Weather: {item.weather[0].description}
-              </li>
-            ))}
-          </ul>
+    return (
+        <div className="PriceContainer">
+            <h2>Electricity price</h2>
+            {priceData ? (
+                <div>
+                    <table className="PriceTable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Price (cents/KWh)</th>
+                                <th>Price with VAT (cents/KWh)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {priceData.data.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{formatDate2(item.startTime)}</td>
+                                    <td>{formatPrice(item.value)}</td>
+                                    <td>{formatPriceWithVAT(item.value)}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            ) : (
+                <p>Loading...</p>
+            )}
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-  );
+    );
 };
 
-export default Forecast;
-
+export default Price;

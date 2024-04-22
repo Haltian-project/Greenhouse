@@ -7,13 +7,13 @@ export const getPrice = (req,res) =>{
     //106 Down-regulation price in the Balancing energy market
     //244 Up-regulating price in the Balancing energy market
     //319 Imbalance price
-   
+
     const fetchData = async () => {
         try {
           const apiKey = process.env.FINGRID_API_KEY; // Store your API key in environment variables
-           
+
           const response = await fetch(
-            `https://data.fingrid.fi/api/datasets/${datasetId}/data?pageSize=30`,
+            'https://data.fingrid.fi/api/datasets/${datasetId}/data?pageSize=30',
             {
                 headers: {
                     'x-api-key': apiKey
@@ -27,6 +27,6 @@ export const getPrice = (req,res) =>{
           res.status(500).json({ error: 'Failed to fetch data from Fingrid API' }); // Handle errors and send an appropriate response
         }
       };
-  
+
       fetchData();
 }

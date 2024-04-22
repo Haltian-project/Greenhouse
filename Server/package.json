@@ -14,12 +14,6 @@
     "body-parse": "^0.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-<<<<<<< HEAD
-    "express": "^4.19.2",
-    "mongoose": "^8.3.1",
-    "node-fetch": "^3.3.2",
-    "nodemon": "^3.1.0"
-=======
     "esm": "^3.2.25",
     "express": "^4.19.2",
     "mongodb": "^6.5.0",
@@ -28,6 +22,5 @@
     "node-fetch": "^3.3.2",
     "nodemon": "^3.1.0",
     "path": "^0.12.7"
->>>>>>> 3fc46205a7c69761693abd368ab5f76dfba441ef
   }
 }

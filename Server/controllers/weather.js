@@ -6,9 +6,9 @@ export const getWeather = (req,res) =>{
     const fetchData = async () => {
         try {
           const apiKey = process.env.OPENWEATHER_API_KEY; // Store your API key in environment variables
-           
+
           const response = await fetch(
-              `https://api.openweathermap.org/data/2.5/weather?id=643492&appid=${apiKey}&units=metric`
+              'https://api.openweathermap.org/data/2.5/weather?id=643492&appid=${apiKey}&units=metric'
           );
           const data = await response.json();
           res.json(data);
@@ -17,6 +17,6 @@ export const getWeather = (req,res) =>{
           res.status(500).json({ error: 'Failed to fetch weather ' }); // Handle errors and send an appropriate response
         }
       };
-  
+
       fetchData();
 }
