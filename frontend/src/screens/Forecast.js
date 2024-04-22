@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
+import { Line } from 'react-chartjs-2';
+import { Chart } from "chart.js/auto";
 
 
 const Forecast = () => {
@@ -33,35 +35,73 @@ const Forecast = () => {
     return `${day}.${month}.  ${hours}:${minutes}`;
   };
 
+  const chartData = {
+    labels: forecastData?.list?.map(item => formatDate(item.dt_txt)) || [],
+    datasets: [
+      {
+        label: 'Temperature (°C)',
+        data: forecastData?.list?.map(item => item.main.temp) || [],
+        backgroundColor: 'rgba(75,192,192,0.2)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 1
+      }
+    ]
+  };
+  const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+        min: -30, 
+        max: 30, 
+      }
+    }
+  };
+
   return (
     <div className="forecast-container">
-      <h2 className="forecast-heading">Weather Forecast</h2>
-      {forecastData ? (
-        <div>
-          {forecastData.city ? (
+        <h2 className="forecast-heading">Weather Forecast</h2>
+        {forecastData ? (
             <div>
-              <p className="forecast-city">City: {forecastData.city.name}</p>
-              <p className="forecast-country">Country: {forecastData.city.country}</p>
+                {forecastData.city ? (
+                    <div>
+                        <p className="forecast-city">City: {forecastData.city.name}</p>
+                        <p className="forecast-country">Country: {forecastData.city.country}</p>
+                    </div>
+                ) : (
+                    <p>City information not available</p>
+                )}
+                <h3 className="forecast-subheading">Forecast:</h3>
+                <table className="forecast-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Temperature (°C)</th>
+                            <th>Humidity (%)</th>
+                            <th>Pressure (hPa)</th>
+                            <th>Weather</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {forecastData.list && forecastData.list.map((item, index) => (
+                            <tr key={index} className="forecast-item">
+                                <td>{formatDate(item.dt_txt)}</td>
+                                <td>{item.main.temp} °C</td>
+                                <td>{item.main.humidity}%</td>
+                                <td>{item.main.pressure} hPa</td>
+                                <td>{item.weather[0].description}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <h3 className="forecast-subheading">Weather forecast chart:</h3>
+                <Line data={chartData} options={options} />
             </div>
-          ) : (
-            <p>City information not available</p>
-          )}
-          <h3 className="forecast-subheading">Forecast:</h3>
-          <ul className="forecast-list">
-            {forecastData.list && forecastData.list.map((item, index) => (
-              <li key={index} className="forecast-item">
-                 {formatDate(item.dt_txt)}: Temperature: {item.main.temp} °C , Humidity: 
-                 {item.main.humidity}% , Pressure: {item.main.pressure} hPa , 
-                 Weather: {item.weather[0].description}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+        ) : (
+            <p>Loading...</p>
+        )}
     </div>
-  );
+);
+
 };
 
 export default Forecast;

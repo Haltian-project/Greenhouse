@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
+import { Line } from 'react-chartjs-2';
+import { Chart } from "chart.js/auto";
 
 const Price = () => {
     const [priceData, setPriceData] = useState(null);
@@ -41,7 +43,32 @@ const Price = () => {
         const priceWithVAT = (centsPerKWh * 1.24).toFixed(2); // Assuming VAT is 24%
         return priceWithVAT;
     }
-
+    const chartData = {
+        labels: priceData ? priceData.data.map(item => formatDate2(item.startTime)) : [],
+        datasets: [
+            {
+                label: 'Price (cents/KWh)',
+                data: priceData ? priceData.data.map(item => formatPrice(item.value)) : [],
+                fill: false,
+                borderColor: 'rgba(75,192,192,1)',
+                tension: 0.1
+            },
+            {
+                label: 'Price with VAT (cents/KWh)',
+                data: priceData ? priceData.data.map(item => formatPriceWithVAT(item.value)) : [],
+                fill: false,
+                borderColor: 'rgba(192,75,192,1)',
+                tension: 0.1
+            }
+        ]
+    };
+    const options = {
+        scales: {
+          y: {
+            beginAtZero: true,
+          }
+        }
+      };
     return (
         <div className="PriceContainer">
             <h2>Electricity price</h2>
@@ -65,6 +92,8 @@ const Price = () => {
                             ))}
                         </tbody>
                     </table>
+                    <h2>Electricity price chart:</h2>
+                    <Line data={chartData}  options={options} />
                 </div>
             ) : (
                 <p>Loading...</p>
