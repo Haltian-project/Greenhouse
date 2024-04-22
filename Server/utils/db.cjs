@@ -89,12 +89,13 @@ async function getDataFromMongoDB() {
         let latestData = {};
 
         // Loop through each field and find the latest value
-        const fields = ['temp', 'carbonDioxide', 'humd', 'airp', 'lghtint', 'lght'];
+        const fields = ['temp', 'carbonDioxide', 'humd', 'airp', 'lghtint', 'lght', 'timestamp'];
         fields.forEach(field => {
             // Find the latest value for the field
             const latestValue = findLatestValue(latestDocuments, field);
             latestData[field] = latestValue;
         });
+       
 
         // Close the database connection
         client.close();
@@ -120,4 +121,65 @@ function findLatestValue(documents, field) {
     return latestValue;
 }
 
-module.exports = { saveDataToMongoDB, getDataFromMongoDB };
+//function to get data from MongoDB
+async function getDataFromMongoDB2() {
+    try {
+        const client = await MongoClient.connect(mongoURI);
+        const db = client.db(dbName);
+        const collection = db.collection('sensor_data');
+
+     
+        const query = {
+            $or: [
+                { temp: { $exists: true } },
+                { carbonDioxide: { $exists: true } },
+                { humd: { $exists: true } },
+                { airp: { $exists: true } },
+                { lghtint: { $exists: true } },
+                { lght: { $exists: true } }
+            ]
+        };
+
+        // Sort by descending order of insertion (timestamp) to get the latest documents first
+        const options = { sort: { timestamp: -1 }, limit: 25 };
+
+        // Find the 20 latest documents
+        const latestDocuments = await collection.find(query, options).toArray();
+        let latest20Data = {};
+
+        
+        // Loop through each field and find the 20 latest values with timestamps
+        const fields = ['temp', 'carbonDioxide', 'humd', 'airp', 'lghtint', 'lght'];
+        fields.forEach(field => {
+            // Find the 20 latest values for the field with timestamps
+            const latestValues = find20Value(latestDocuments, field);
+            latest20Data[field] = latestValues;
+        });
+
+        // Close the database connection
+        client.close();
+
+        console.log('Data obtained');
+
+        return latest20Data;
+    } catch (err) {
+        console.error('Error getting data from MongoDB:', err);
+        return null;
+    }
+}
+
+// Function to find the 20 latest values with timestamps for a field
+function find20Value(documents, field) {
+    const values = [];
+    for (const doc of documents) {
+        if (doc[field] !== undefined) {
+            values.push({ timestamp: doc.timestamp, value: doc[field] });
+            if (values.length === 20) {
+                break;
+            }
+        }
+    }
+    return values;
+}
+
+module.exports = { saveDataToMongoDB, getDataFromMongoDB , getDataFromMongoDB2};

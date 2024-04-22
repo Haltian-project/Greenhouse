@@ -95,7 +95,7 @@ const Home = () => {
           <button>
             <Link to="/charts">
               <FaLightbulb size={30} />
-              <p>Light: {sensorData.lght} lx?</p>
+              <p>Light: {sensorData.lght} k lux</p>
             </Link>
           </button>
         </div>
