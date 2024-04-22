@@ -165,14 +165,6 @@ button:hover {
   margin-bottom: 20px;
 }
 
-.forecast-city {
-  font-weight: bold;
-}
-
-.forecast-country {
-  font-style: italic;
-}
-
 .forecast-subheading {
   font-size: 20px;
   margin-top: 20px;
@@ -192,6 +184,23 @@ button:hover {
 
 .forecast-item:last-child {
   margin-bottom: 0;
+}
+
+.forecast-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.forecast-table th,
+.forecast-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.forecast-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
 }
 
 .PriceContainer {
