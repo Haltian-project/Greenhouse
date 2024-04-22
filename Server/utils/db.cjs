@@ -44,6 +44,10 @@ async function saveDataToMongoDB(data) {
      document.lghtint = data.lghtint;
  }
 
+  if (Object.keys(document).length > 0) {
+            const options = { timeZone: 'Europe/Helsinki' };
+            document.timestamp = new Date().toLocaleString('fi-FI', options);
+        }
  // Insert the document into the collection if it has at least one value
  if (Object.keys(document).length > 0) {
      await collection.insertOne(document);
