@@ -11,7 +11,7 @@ const Charts = () => {
   const [showLight, setShowLight] = useState(false);
   const [showCO2, setShowCO2] = useState(false);
   const [showLightIntensity, setShowLightIntensity] = useState(false);
-  const [showAllCharts, setShowAllCharts] = useState(false);
+
 
   const [chartData, setChartData] = useState(null);
 
@@ -30,6 +30,14 @@ const Charts = () => {
     fetchData();
   }, []);
 
+  const options = {
+    scales: {
+      x: {
+        reverse: true,
+      }
+    }
+  };
+
   return (
     <div>
       <h1>Green House</h1>
@@ -44,6 +52,7 @@ const Charts = () => {
               labels: chartData.temp.map(entry => entry.timestamp),
               datasets: [{ label: 'Inside Temp', data: chartData.temp.map(entry => entry.value) }],
             }}
+            options={options}
           /> 
         </div>
       )}
@@ -58,6 +67,7 @@ const Charts = () => {
               labels: chartData.humd.map(entry => entry.timestamp),
               datasets: [{ label: 'Inside Humidity', data: chartData.humd.map(entry => entry.value) }],
             }}
+            options={options}
           /> 
         </div>
       )}
@@ -72,6 +82,7 @@ const Charts = () => {
               labels: chartData.airp.map(entry => entry.timestamp),
               datasets: [{ label: 'Inside Air Pressure', data: chartData.airp.map(entry => entry.value) }],
             }}
+            options={options}
           /> 
         </div>
       )}
@@ -86,6 +97,7 @@ const Charts = () => {
               labels: chartData.lght.map(entry => entry.timestamp),
               datasets: [{ label: 'Light', data: chartData.lght.map(entry => entry.value) }],
             }}
+            options={options}
           /> 
         </div>
       )}
@@ -100,6 +112,7 @@ const Charts = () => {
               labels: chartData.lghtint.map(entry => entry.timestamp),
               datasets: [{ label: 'Light Intensity', data: chartData.lghtint.map(entry => entry.value) }],
             }}
+            options={options}
           /> 
         </div>
       )}
@@ -114,6 +127,7 @@ const Charts = () => {
               labels: chartData.carbonDioxide.map(entry => entry.timestamp),
               datasets: [{ label: 'CO2', data: chartData.carbonDioxide.map(entry => entry.value) }],
             }}
+            options={options}
           />  
         </div>
       )}

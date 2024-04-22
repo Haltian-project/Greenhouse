@@ -1,7 +1,7 @@
 import React,{ useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { FaThermometer, FaTint, FaWind, FaSmog, FaLightbulb, FaRegLightbulb } from 'react-icons/fa'; // Importing icons from FontAwesome library
+import { FaThermometer, FaTint, FaWind, FaSmog, FaLightbulb, FaRegLightbulb, FaCloudSunRain, FaBolt, FaChartLine } from 'react-icons/fa'; // Importing icons from FontAwesome library
 
 const Home = () => {
   const [sensorData, setSensorData] = useState(null);
@@ -45,13 +45,13 @@ const Home = () => {
     <div>
      <h1>Home</h1>
       <button>
-        <Link to="/charts"> Go to Charts</Link>
+       <Link to="/charts"><FaChartLine/> Go to Charts</Link>
       </button>
       <button>
-        <Link to="/forecast">See weather forecast</Link>
+        <Link to="/forecast"><FaCloudSunRain/> See weather forecast</Link>
       </button>
       <button>
-        <Link to="/price">Electricity price</Link>
+       <Link to="/price"><FaBolt/> Electricity price</Link>
       </button>
 
       <h1>Latest data:</h1> 
@@ -87,7 +87,7 @@ const Home = () => {
           <button>
             <Link to="/charts">
               <FaWind size={30} />
-              <p>Inside Airpressure: {sensorData.airp} hpa</p>
+              <p>Inside Airpressure: {sensorData.airp} pa</p>
             </Link>
           </button>
         </div>
