@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 dotenv.config();
 
+<<<<<<< HEAD
 <<<<<<< HEAD:index.js
 
 
@@ -38,6 +39,9 @@ app.get('/forecast',(req,res) =>{
 =======
 export const getForecast = (req,res) =>{
 >>>>>>> a10928a9fef6526604c548c2cfc3575f7c4c191b:Server/controllers/forecast.js
+=======
+export const getForecast = (req,res) =>{
+>>>>>>> 3fc46205a7c69761693abd368ab5f76dfba441ef
     const fetchData = async () => {
         try {
           const apiKey = process.env.OPENWEATHER_API_KEY; // Store your API key in environment variables
@@ -54,6 +58,7 @@ export const getForecast = (req,res) =>{
       };
   
       fetchData();
+<<<<<<< HEAD
 <<<<<<< HEAD:index.js
 })
 
@@ -66,3 +71,6 @@ app.listen(5000, ()=> console.log(`Server is running on ${PORT}`))
 =======
 }
 >>>>>>> a10928a9fef6526604c548c2cfc3575f7c4c191b:Server/controllers/forecast.js
+=======
+}
+>>>>>>> 3fc46205a7c69761693abd368ab5f76dfba441ef

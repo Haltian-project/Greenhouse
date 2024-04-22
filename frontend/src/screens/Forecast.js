@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
 import '../App.css'; 
 
 
@@ -51,7 +50,9 @@ const Forecast = () => {
           <ul className="forecast-list">
             {forecastData.list && forecastData.list.map((item, index) => (
               <li key={index} className="forecast-item">
-                {formatDate(item.dt_txt)}:  Temperature: {item.main.temp} °C, Humidity: {item.main.humidity}%, Weather: {item.weather[0].description}
+                 {formatDate(item.dt_txt)}: Temperature: {item.main.temp} °C , Humidity: 
+                 {item.main.humidity}% , Pressure: {item.main.pressure} hPa , 
+                 Weather: {item.weather[0].description}
               </li>
             ))}
           </ul>
@@ -64,3 +65,4 @@ const Forecast = () => {
 };
 
 export default Forecast;
+
