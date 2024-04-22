@@ -44,10 +44,18 @@ async function saveDataToMongoDB(data) {
      document.lghtint = data.lghtint;
  }
 
-  if (Object.keys(document).length > 0) {
-            const options = { timeZone: 'Europe/Helsinki' };
-            document.timestamp = new Date().toLocaleString('fi-FI', options);
-        }
+ if (Object.keys(document).length > 0) {
+    const options = {
+        timeZone: 'Europe/Helsinki',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    };
+    document.timestamp = new Date().toLocaleString('fi-FI', options);
+}
  // Insert the document into the collection if it has at least one value
  if (Object.keys(document).length > 0) {
      await collection.insertOne(document);
@@ -82,7 +90,7 @@ async function getDataFromMongoDB() {
         };
 
         // Sort by descending order of insertion (_id) to get the latest documents first
-        const options = { sort: { _id: -1 }, limit: 25 };
+        const options = { sort: { _id: -1 } };
 
         // Find the 20 latest documents
         const latestDocuments = await collection.find(query, options).toArray();
@@ -141,7 +149,7 @@ async function getDataFromMongoDB2() {
         };
 
         // Sort by descending order of insertion (timestamp) to get the latest documents first
-        const options = { sort: { timestamp: -1 }, limit: 25 };
+        const options = { sort: { _id: -1 } };
 
         // Find the 20 latest documents
         const latestDocuments = await collection.find(query, options).toArray();
@@ -152,8 +160,8 @@ async function getDataFromMongoDB2() {
         const fields = ['temp', 'carbonDioxide', 'humd', 'airp', 'lghtint', 'lght'];
         fields.forEach(field => {
             // Find the 20 latest values for the field with timestamps
-            const latestValues = find20Value(latestDocuments, field);
-            latest20Data[field] = latestValues;
+            const latestValue2 = find20Value(latestDocuments, field);
+            latest20Data[field] = latestValue2;
         });
 
         // Close the database connection

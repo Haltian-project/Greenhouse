@@ -43,25 +43,27 @@ const Price = () => {
         const priceWithVAT = (centsPerKWh * 1.24).toFixed(2); // Assuming VAT is 24%
         return priceWithVAT;
     }
-    const chartData = {
-        labels: priceData ? priceData.data.map(item => formatDate2(item.startTime)) : [],
-        datasets: [
-            {
-                label: 'Price (cents/KWh)',
-                data: priceData ? priceData.data.map(item => formatPrice(item.value)) : [],
-                fill: false,
-                borderColor: 'rgba(75,192,192,1)',
-                tension: 0.1
-            },
-            {
-                label: 'Price with VAT (cents/KWh)',
-                data: priceData ? priceData.data.map(item => formatPriceWithVAT(item.value)) : [],
-                fill: false,
-                borderColor: 'rgba(192,75,192,1)',
-                tension: 0.1
-            }
-        ]
-    };
+   // Sort time labels and corresponding data
+   const sortedData = priceData ? priceData.data.sort((a, b) => new Date(a.startTime) - new Date(b.startTime)) : [];
+   const chartData = {
+       labels: sortedData.map(item => formatDate2(item.startTime)),
+       datasets: [
+           {
+               label: 'Price (cents/KWh)',
+               data: sortedData.map(item => formatPrice(item.value)),
+               fill: false,
+               borderColor: 'rgba(75,192,192,1)',
+               tension: 0.1
+           },
+           {
+               label: 'Price with VAT (cents/KWh)',
+               data: sortedData.map(item => formatPriceWithVAT(item.value)),
+               fill: false,
+               borderColor: 'rgba(192,75,192,1)',
+               tension: 0.1
+           }
+       ]
+   };
     const options = {
         scales: {
           y: {

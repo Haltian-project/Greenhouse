@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { FaHome } from 'react-icons/fa';
+import { FaHome , FaCloudSunRain, FaBolt, FaChartLine} from 'react-icons/fa';
 
 const Navbar = () => {
   return (
@@ -12,13 +12,13 @@ const Navbar = () => {
         </Link>
         <div className="navbar-links">
           <Link to="/charts" className="nav-link">
-            Charts
+           <FaChartLine/> Charts
           </Link>
           <Link to="/forecast" className="nav-link">
-            Weather forecast
+          <FaCloudSunRain/>Weather forecast
           </Link>
           <Link to="/price" className="nav-link">
-            Electricity Price
+          <FaBolt/>Electricity Price
           </Link>
         </div>
       </div>
