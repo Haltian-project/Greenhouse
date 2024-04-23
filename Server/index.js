@@ -8,7 +8,6 @@ import mongoose from 'mongoose';
 import getDataRouter from './routers/getdata.js';
 import logdataRouter from './routers/logdata.js';
 import get20DataRouter from './routers/get20data.js';
-import logDataRouter from './routers/logdata.js';
 import { client } from './services/mqtt.cjs';
 import { getDataFromMongoDB } from './utils/db.cjs'
 
