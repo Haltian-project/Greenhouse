@@ -39,8 +39,10 @@ client.on('message', async (topic, message) => {
     console.log('Received message:', message.toString());
     // Handle the received message here
     const data = JSON.parse(message.toString());
+  
     await saveDataToMongoDB(data); // Call the function to save data to the sensor_data collection
     await saveDataToMongoDB_log(data); // Call the function to save data to the backlog collection
+
 });
 
 // Handle error event

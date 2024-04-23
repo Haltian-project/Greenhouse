@@ -10,7 +10,7 @@ const Price = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `http://localhost:8000/price`
+                    `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/price`
                 );
                 const data = await response.json();
                 setPriceData(data);
@@ -82,7 +82,7 @@ const Price = () => {
                             <tr>
                                 <th>Time</th>
                                 <th>Price (cents/KWh)</th>
-                                <th>Price with VAT (cents/KWh)</th>
+                                <th>Price with VAT 24 % (cents/KWh)</th>
                             </tr>
                         </thead>
                         <tbody>
