@@ -6,7 +6,7 @@ import weather from './routers/weather.js';
 import price from './routers/price.js';
 import mongoose from 'mongoose';
 import getDataRouter from './routers/getdata.js';
-import logdataRouter from './routers/logData.js';
+import logdataRouter from './routers/logdata.js';
 import get20DataRouter from './routers/get20data.js';
 import logDataRouter from './routers/logdata.js';
 import { client } from './services/mqtt.cjs';
