@@ -13,8 +13,4 @@ router.get('/', async (_req, res) => {
   }
 });
 
-<<<<<<< HEAD
 export default router;
-=======
-export default router;
->>>>>>> daca3c4cdea2d6f2f77afb4769d86ac67fe00f17
