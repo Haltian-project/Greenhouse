@@ -81,7 +81,7 @@ const Price = () => {
                             <tr>
                                 <th>Time</th>
                                 <th>Price (cents/KWh)</th>
-                                <th>Price with VAT (cents/KWh)</th>
+                                <th>Price with VAT 24 % (cents/KWh)</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -2,13 +2,13 @@ require('dotenv').config({ path: `${__dirname}/../.env` });
 const mqtt = require('mqtt');
 const fs = require('fs');
 const path = require('path');
-const { saveDataToMongoDB } = require('../utils/db.cjs');
+const { saveDataToMongoDB, saveDataToMongoDB_log } = require('../utils/db.cjs');
 
 const keyPath = path.resolve(__dirname, '../certificates/sales-cloudext-prfi002024oamk1.key');
 const certPath = path.resolve(__dirname, '../certificates/sales-cloudext-prfi002024oamk1.pem');
 
 // MQTT broker URL and options
-const brokerUrl = process.env.MQTT_BROKER_URL;
+const brokerUrl = 'mqtts://a39cwxnxny8cvy.iot.eu-west-1.amazonaws.com:8883';
 const options = {
     key: fs.readFileSync(keyPath), // Load the key
     cert: fs.readFileSync(certPath), // Load the certificate
@@ -16,7 +16,7 @@ const options = {
 };
 
 // MQTT topic
-const topic = process.env.MQTT_TOPIC;
+const topic = 'cloudext/json/pr/fi/prfi002024oamk1/#';
 
 // Create a client instance
 const client = mqtt.connect(brokerUrl, options);
@@ -40,6 +40,7 @@ client.on('message', async (topic, message) => {
     // Handle the received message here
     const data = JSON.parse(message.toString());
     await saveDataToMongoDB(data); // Call the function to save data to the database
+    await saveDataToMongoDB_log(data);
 });
 
 // Handle error event

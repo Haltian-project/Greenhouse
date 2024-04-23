@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const getPrice = (req,res) =>{
-    const datasetId = 244; 
+
+    const datasetId = 106; 
     //106 Down-regulation price in the Balancing energy market
     //244 Up-regulating price in the Balancing energy market
     //319 Imbalance price
@@ -14,6 +15,7 @@ export const getPrice = (req,res) =>{
            
           const response = await fetch(
             `https://data.fingrid.fi/api/datasets/${datasetId}/data?pageSize=30`,
+
             {
                 headers: {
                     'x-api-key': apiKey
@@ -27,6 +29,7 @@ export const getPrice = (req,res) =>{
           res.status(500).json({ error: 'Failed to fetch data from Fingrid API' }); // Handle errors and send an appropriate response
         }
       };
+
   
       fetchData();
 }
