@@ -8,6 +8,7 @@ import mongoose from 'mongoose';
 import getDataRouter from './routers/getdata.js';
 import logdataRouter from './routers/logData.js';
 import get20DataRouter from './routers/get20data.js';
+import logDataRouter from './routers/logdata.js';
 import { client } from './services/mqtt.cjs';
 import { getDataFromMongoDB } from './utils/db.cjs'
 
@@ -25,7 +26,9 @@ app.use('/weather', weather);
 app.use('/price', price);
 app.use('/getdata', getDataRouter);
 app.use('/get20data', get20DataRouter);
+
 app.use('/logdata', logdataRouter);
+
 // MQTT client
 client.on('connect', () => {
   console.log('Connected to MQTT broker');

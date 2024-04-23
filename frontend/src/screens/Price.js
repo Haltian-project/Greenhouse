@@ -43,8 +43,9 @@ const Price = () => {
         const priceWithVAT = (centsPerKWh * 1.24).toFixed(2); // Assuming VAT is 24%
         return priceWithVAT;
     }
+
    // Sort time labels and corresponding data
-   const sortedData = priceData ? priceData.data.sort((a, b) => new Date(a.startTime) - new Date(b.startTime)) : [];
+   const sortedData = priceData ? [...priceData.data].reverse() : [];
    const chartData = {
        labels: sortedData.map(item => formatDate2(item.startTime)),
        datasets: [
@@ -85,13 +86,13 @@ const Price = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {priceData.data.map((item, index) => (
+                            {sortedData.map((item, index) => (
                                 <tr key={index}>
                                     <td>{formatDate2(item.startTime)}</td>
                                     <td>{formatPrice(item.value)}</td>
                                     <td>{formatPriceWithVAT(item.value)}</td>
                                 </tr>
-                            ))}
+                            )).reverse()} 
                         </tbody>
                     </table>
                     <h2>Electricity price chart:</h2>
