@@ -12,8 +12,11 @@ const Forecast = () => {
     const fetchData = async () => {
       try {
     
-         const response = await fetch(
-            `http://localhost:8000/forecast`
+        const serverUrl = process.env.REACT_APP_SERVER_URL;
+        const serverPort = process.env.REACT_APP_SERVER_PORT;
+        
+        const response = await fetch(
+          `${serverUrl}:${serverPort}/forecast`
         );
         const data = await response.json();
         setForecastData(data);
