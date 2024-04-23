@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const getPrice = (req,res) =>{
-    const datasetId = 244; 
+    const datasetId = 106; 
     //106 Down-regulation price in the Balancing energy market
     //244 Up-regulating price in the Balancing energy market
     //319 Imbalance price
