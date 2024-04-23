@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import { Line } from 'react-chartjs-2';
 import { Chart } from "chart.js/auto";
-
+import { useNavigate } from 'react-router-dom';
 
 const Charts = () => {
   const [showInsideTemp, setShowInsideTemp] = useState(false);
@@ -14,7 +14,7 @@ const Charts = () => {
 
 
   const [chartData, setChartData] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -43,8 +43,8 @@ const Charts = () => {
 
   return (
     <div>
-      <h1>Green House</h1>
-      
+      <button1 onClick={() => navigate('/')}>Back To Home</button1>
+      <h1>Greenhouse</h1>      
       <button onClick={() => setShowInsideTemp(!showInsideTemp)}>
         {showInsideTemp ? 'Hide Inside Temp Chart' : 'Show Inside Temp Chart'}
       </button>

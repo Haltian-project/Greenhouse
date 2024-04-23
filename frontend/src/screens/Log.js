@@ -1,7 +1,9 @@
+
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Log = () => {
-
+const navigate = useNavigate();
     const [logData, setLogData] = useState(null);
 
     useEffect(() => {
@@ -29,9 +31,11 @@ const Log = () => {
 
   return (
     <div>
-        moro
+      <button1 onClick={() => navigate('/')}>Back To Home</button1>
+     
     </div>
-  )
+  );
 }
+
 
 export default Log;
