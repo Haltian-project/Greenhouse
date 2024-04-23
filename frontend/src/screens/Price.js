@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../App.css'; 
 import { Line } from 'react-chartjs-2';
 import { Chart } from "chart.js/auto";
+import { useNavigate } from 'react-router-dom';
 
 const Price = () => {
     const [priceData, setPriceData] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,6 +75,7 @@ const Price = () => {
       };
     return (
         <div className="PriceContainer">
+            <button1 onClick={() => navigate('/')}>Back To Home</button1>
             <h2>Electricity price</h2>
             {priceData ? (
                 <div>
