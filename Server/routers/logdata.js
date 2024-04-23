@@ -1,3 +1,4 @@
+
 import express from 'express';
 import { getDataFromMongoDB_Log } from '../utils/db.cjs';
 
@@ -13,4 +14,6 @@ router.get('/', async (_req, res) => {
   }
 });
 
+
 export default router;
+
