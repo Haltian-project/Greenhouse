@@ -78,6 +78,10 @@ Running the Application
    cd greenhouse/frontend
    npm run start:frontend
 
+## Data Schema
+
+![Screenshot 2024-04-24 at 23 56 57](https://github.com/Haltian-project/Greenhouse/assets/28098368/17643cb6-1dcf-48b8-8287-51b1a6b4ff0a)
+
 ## Team
 
 - **[Bao Tran](https://github.com/tranxbao)**
