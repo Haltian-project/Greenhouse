@@ -20,9 +20,9 @@ const Charts = () => {
       try {
         // Fetch sensor data from backend API
         const serverUrl = process.env.REACT_APP_SERVER_URL;
-        const serverPort = process.env.REACT_APP_SERVER_PORT;
+        //const serverPort = process.env.REACT_APP_SERVER_PORT;
         const response = await fetch(
-          `${serverUrl}:${serverPort}/get20data`);
+          `${serverUrl}/get20data`);
         const data = await response.json();
         setChartData(data);
       } catch (error) {

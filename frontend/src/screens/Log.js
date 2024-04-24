@@ -11,9 +11,9 @@ const navigate = useNavigate();
           try {
             // Fetch sensor data from backend API
             const serverUrl = process.env.REACT_APP_SERVER_URL;
-            const serverPort = process.env.REACT_APP_SERVER_PORT;
+            //const serverPort = process.env.REACT_APP_SERVER_PORT;
             const response = await fetch(
-              `${serverUrl}:${serverPort}/logdata`);
+              `${serverUrl}/logdata`);
             const data = await response.json();
             setLogData(data);
           } catch (error) {

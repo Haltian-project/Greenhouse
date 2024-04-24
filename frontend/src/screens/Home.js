@@ -10,7 +10,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         // Fetch sensor data from backend API
-        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/getdata`);
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/getdata`);
         const data = await response.json();
         setSensorData(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
     
-        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/weather`);
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/weather`);
         const data = await response.json();
         setWeatherData(data);
       } catch (error) {

@@ -12,7 +12,7 @@ const Price = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch(
-                    `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/price`
+                    `${process.env.REACT_APP_SERVER_URL}/price`
                 );
                 const data = await response.json();
                 setPriceData(data);
