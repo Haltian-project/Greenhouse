@@ -227,6 +227,31 @@ button:hover {
 .PriceTable td {
   text-align: center;
 }
+/* logtable.css */
+
+.log-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.log-table th {
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: center;
+  border-bottom: 3px solid #ddd; 
+}
+
+.log-table td {
+  padding: 8px;
+  border-bottom: 3px solid #ddd;
+  text-align: center;
+}
+
+.log-table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
 
 button1 {
   display: block;
@@ -241,3 +266,4 @@ button1 {
   width: 200px;
   text-align: center;
 }
+

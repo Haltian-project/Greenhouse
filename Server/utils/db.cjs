@@ -78,32 +78,32 @@ async function saveDataToMongoDB_log(data) {
         const document = {};
 
         // Add temperature if available and within range
-        if (data.temp && (data.temp < -10 || data.temp > 10)) {
+        if (data.temp && (data.temp < 10 || data.temp > 20)) {
             document.temp = data.temp;
         }
 
         // Add humidity if available and within range
-        if (data.humd && (data.humd < -10 || data.humd > 10)) {
+        if (data.humd && (data.humd < 25 || data.humd > 45)) {
             document.humd = data.humd;
         }
 
         // Add carbon dioxide level if available and within range
-        if (data.carbonDioxide && (data.carbonDioxide < -10 || data.carbonDioxide > 10)) {
+        if (data.carbonDioxide && (data.carbonDioxide < 500 || data.carbonDioxide > 600)) {
             document.carbonDioxide = data.carbonDioxide;
         }
 
         // Add air pressure if available and within range
-        if (data.airp && (data.airp < -10 || data.airp > 10)) {
+        if (data.airp && (data.airp < 100500 || data.airp > 103000)) {
             document.airp = data.airp;
         }
 
         // Add light level if available and within range
-        if (data.lght && (data.lght < -10 || data.lght > 10)) {
+        if (data.lght && (data.lght < 500 || data.lght > 2500)) {
             document.lght = data.lght;
         }
 
         // Add light intensity if available and within range
-        if (data.lghtint && (data.lghtint < -10 || data.lghtint > 10)) {
+        if (data.lghtint && (data.lghtint < 50000 || data.lghtint > 350000)) {
             document.lghtint = data.lghtint;
         }
 
@@ -280,7 +280,7 @@ async function getDataFromMongoDB_Log() {
 
         
         // Loop through each field and find the 20 latest values with timestamps
-        const fields = ['temp', 'carbonDioxide', 'humd', 'airp', 'lghtint', 'lght', 'timestamp'];
+        const fields = ['temp', 'carbonDioxide', 'humd', 'airp', 'lghtint', 'lght'];
         fields.forEach(field => {
             // Find the 20 latest values for the field with timestamps
             const latestValue3 = findLogValue(latestDocuments, field);

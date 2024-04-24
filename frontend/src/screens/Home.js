@@ -93,7 +93,7 @@ const Home = () => {
           <button>
             <Link to="/charts">
               <FaLightbulb size={30} />
-              <p>Light: {sensorData.lght} k lux</p>
+              <p>Light: {sensorData.lght} lux</p>
             </Link>
           </button>
         </div>
@@ -101,7 +101,7 @@ const Home = () => {
           <button>
             <Link to="/charts">
               <FaRegLightbulb size={30} />
-              <p>Light intensity: {sensorData.lghtint} lux?</p>
+              <p>Light intensity: {sensorData.lghtint} lux</p>
             </Link>
           </button>
         </div>
