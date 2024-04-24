@@ -54,27 +54,27 @@ The project is divided into two main parts:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/greenhouse.git
+   git clone https://github.com/Haltian-project/Greenhouse.git
 
 2. Install the dependencies for the serve
-
+   ```sh
    cd greenhouse/server
    npm install  
 
 3. Install the dependencies for the frontend
-
+   ```sh
     cd greenhouse/server
     npm install
 
 Running the Application
 
 1. Start the serve:
-
+   ```sh
    cd greenhouse/server
    npm run start
 
 2. In a new terminal window, start the frontend: 
-
+   ```sh
    cd greenhouse/frontend
    npm run start:frontend  
 
