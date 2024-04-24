@@ -253,3 +253,17 @@ button:hover {
 }
 
 
+button1 {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #b42b64;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+  text-align: center;
+}
+

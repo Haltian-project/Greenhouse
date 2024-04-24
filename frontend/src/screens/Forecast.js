@@ -3,20 +3,23 @@ import '../App.css';
 import { Line } from 'react-chartjs-2';
 import { Chart } from "chart.js/auto";
 
+import { useNavigate } from 'react-router-dom';
+
 
 const Forecast = () => {
   const [forecastData, setForecastData] = useState(null);
 
-
+  
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
     
         const serverUrl = process.env.REACT_APP_SERVER_URL;
-        const serverPort = process.env.REACT_APP_SERVER_PORT;
+        //const serverPort = process.env.REACT_APP_SERVER_PORT;
         
         const response = await fetch(
-          `${serverUrl}:${serverPort}/forecast`
+          `${serverUrl}/forecast`
         );
         const data = await response.json();
         setForecastData(data);
@@ -60,8 +63,12 @@ const Forecast = () => {
     }
   };
 
+
+
   return (
+
     <div className="forecast-container">
+       <button1 onClick={() => navigate('/')}>Back To Home</button1>
         <h2 className="forecast-heading">Weather Forecast</h2>
         {forecastData ? (
             <div>
