@@ -74,36 +74,40 @@ async function saveDataToMongoDB_log(data) {
         const client = await MongoClient.connect(mongoURI);
         const db = client.db(dbName);
         const collection = db.collection('backlog'); // Collection name: backlog
+        
+        // Get the limit values from MongoDB
+        const limits = await getLimitsFromMongoDB();
+
         // Create a document containing the desired values
         const document = {};
 
-        // Add temperature if available and within range
-        if (data.temp && (data.temp < 10 || data.temp > 20)) {
+        // Add temperature if available and within limits
+        if (data.temp && (data.temp < limits.tempMin || data.temp > limits.tempMax)) {
             document.temp = data.temp;
         }
 
-        // Add humidity if available and within range
-        if (data.humd && (data.humd < 25 || data.humd > 45)) {
+        // Add humidity if available and within limits
+        if (data.humd && (data.humd < limits.humdMin || data.humd > limits.humdMax)) {
             document.humd = data.humd;
         }
 
-        // Add carbon dioxide level if available and within range
-        if (data.carbonDioxide && (data.carbonDioxide < 500 || data.carbonDioxide > 600)) {
+        // Add carbon dioxide level if available and within limits
+        if (data.carbonDioxide && (data.carbonDioxide < limits.carbonDioxideMin || data.carbonDioxide > limits.carbonDioxideMax)) {
             document.carbonDioxide = data.carbonDioxide;
         }
 
-        // Add air pressure if available and within range
-        if (data.airp && (data.airp < 100500 || data.airp > 103000)) {
+        // Add air pressure if available and within limits
+        if (data.airp && (data.airp < limits.airPressureMin || data.airp > limits.airPressureMax)) {
             document.airp = data.airp;
         }
 
-        // Add light level if available and within range
-        if (data.lght && (data.lght < 500 || data.lght > 2500)) {
+        // Add light level if available and within limits
+        if (data.lght && (data.lght < limits.lightMin || data.lght > limits.lightMax)) {
             document.lght = data.lght;
         }
 
-        // Add light intensity if available and within range
-        if (data.lghtint && (data.lghtint < 50000 || data.lghtint > 350000)) {
+        // Add light intensity if available and within limits
+        if (data.lghtint && (data.lghtint < limits.lightIntensityMin || data.lghtint > limits.lightIntensityMax)) {
             document.lghtint = data.lghtint;
         }
 
@@ -119,6 +123,7 @@ async function saveDataToMongoDB_log(data) {
             };
             document.timestamp = new Date().toLocaleString('fi-FI', options);
         }
+
         // Insert the document into the collection if it has at least one value
         if (Object.keys(document).length > 0) {
             await collection.insertOne(document);
@@ -126,12 +131,76 @@ async function saveDataToMongoDB_log(data) {
         } else {
             console.log('No valid data to save - exceeded');
         }
+
         // Close the database connection
         client.close();
     } catch (err) {
-        console.error('Error saving data to MongoDB:', err);
+        console.error('Error saving data to MongoDB:', err);
     }
 }
+
+
+async function saveLimitsToMongoDB(limits) {
+    try {
+        const client = await MongoClient.connect(mongoURI);
+        const db = client.db(dbName);
+        const collection = db.collection('limits');
+        
+        // Insert new limit document
+        const document = {};
+        // Add temperature min and max if available
+        if (limits.tempMin) {
+            document.tempMin = limits.tempMin;
+        }
+        if (limits.tempMax) {
+            document.tempMax = limits.tempMax;
+        }
+        // Add humidity min and max if available
+        if (limits.humdMin) {
+            document.humdMin = limits.humdMin;
+        }
+        if (limits.humdMax) {
+            document.humdMax = limits.humdMax;
+        }
+        // Add carbon dioxide min and max if available
+        if (limits.carbonDioxideMin) {
+            document.carbonDioxideMin = limits.carbonDioxideMin;
+        }
+        if (limits.carbonDioxideMax) {
+            document.carbonDioxideMax = limits.carbonDioxideMax;
+        }
+        // Add air pressure min and max if available
+        if (limits.airPressureMin) {
+            document.airPressureMin = limits.airPressureMin;
+        }
+        if (limits.airPressureMax) {
+            document.airPressureMax = limits.airPressureMax;
+        }
+        // Add light min and max if available
+        if (limits.lightMin) {
+            document.lightMin = limits.lightMin;
+        }
+        if (limits.lightMax) {
+            document.lightMax = limits.lightMax;
+        }
+        // Add light intensity min and max if available
+        if (limits.lightIntensityMin) {
+            document.lightIntensityMin = limits.lightIntensityMin;
+        }
+        if (limits.lightIntensityMax) {
+            document.lightIntensityMax = limits.lightIntensityMax;
+        }
+        
+        await collection.insertOne(document);
+        
+        console.log('Limits saved to MongoDB');
+        
+        client.close();
+    } catch (err) {
+        console.error('Error saving limits to MongoDB:', err);
+    }
+}
+
 
 
 //function to get data from MongoDB
@@ -312,6 +381,44 @@ function findLogValue(documents, field) {
     }
     return values;
 }
+async function getLimitsFromMongoDB() {
+    try {
+        const client = await MongoClient.connect(mongoURI);
+        const db = client.db(dbName);
+        const collection = db.collection('limits');
+        
+        // Find the latest limit document
+        const cursor = collection.find().sort({ _id: -1 }).limit(1);
+        const limitDocument = await cursor.next();
+        
+        // Form the limits object from the document fields
+        const limits = {
+            tempMin: limitDocument.tempMin,
+            tempMax: limitDocument.tempMax,
+            humdMin: limitDocument.humdMin,
+            humdMax: limitDocument.humdMax,
+            carbonDioxideMin: limitDocument.carbonDioxideMin,
+            carbonDioxideMax: limitDocument.carbonDioxideMax,
+            airPressureMin: limitDocument.airPressureMin,
+            airPressureMax: limitDocument.airPressureMax,
+            lightMin: limitDocument.lightMin,
+            lightMax: limitDocument.lightMax,
+            lightIntensityMin: limitDocument.lightIntensityMin,
+            lightIntensityMax: limitDocument.lightIntensityMax
+        };
+        
+        console.log('Limits obtained from MongoDB');
+        
+        client.close();
+        
+        return limits;
+    } catch (err) {
+        console.error('Error getting limits from MongoDB:', err);
+        return null;
+    }
+}
 
-module.exports = { saveDataToMongoDB, saveDataToMongoDB_log, getDataFromMongoDB , getDataFromMongoDB2, getDataFromMongoDB_Log};
+
+
+module.exports = { saveDataToMongoDB, saveDataToMongoDB_log, saveLimitsToMongoDB, getDataFromMongoDB , getDataFromMongoDB2, getDataFromMongoDB_Log, getLimitsFromMongoDB};
 

@@ -7,6 +7,7 @@ import Forecast from './screens/Forecast';
 import Navbar from './components/Navbar';
 import Price from './screens/Price'; 
 import Log from './screens/Log';
+import Settings from './screens/Settings';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path='/Forecast' element={<Forecast/>} />
             <Route path='/Price' element={<Price/>} />
             <Route path='/Log' element={<Log/>} />
+            <Route path='/Settings' element={<Settings/>} />
           </Routes>
           </div>
         </Router>

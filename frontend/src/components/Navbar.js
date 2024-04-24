@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { FaHome , FaCloudSunRain, FaBolt, FaChartLine, FaBookOpen} from 'react-icons/fa';
+import { FaHome , FaCloudSunRain, FaBolt, FaChartLine, FaBookOpen, FaToolbox} from 'react-icons/fa';
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <FaHome className="home-icon" /> Green House
+          <FaHome className="home-icon" /> Greenhouse
         </Link>
         <div className="navbar-links">
           <Link to="/charts" className="nav-link">
@@ -23,6 +23,9 @@ const Navbar = () => {
           <Link to="/log" className="nav-link">
           <FaBookOpen/>Log
           </Link>
+          <Link to="/settings" className="nav-link">
+          <FaToolbox className="home-icon" /> Settings
+        </Link>
         </div>
       </div>
     </nav>
