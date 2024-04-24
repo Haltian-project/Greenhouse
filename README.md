@@ -82,15 +82,6 @@ Running the Application
 
 ![Screenshot 2024-04-24 at 23 56 57](https://github.com/Haltian-project/Greenhouse/assets/28098368/17643cb6-1dcf-48b8-8287-51b1a6b4ff0a)
 
-## Team
-
-- **[Bao Tran](https://github.com/tranxbao)**
-
-- **[Tuukka Huru](https://github.com/TuukkaHuru)**
-
-- **[Osman Akbaba](https://github.com/OsmanAkbaba)**
-
-- **[Ziqi Li](https://github.com/ZiqiLi28)**
 
 ### Captures of Application
 
@@ -100,3 +91,12 @@ Running the Application
 
 ![Screenshot 2024-04-24 at 23 43 29](https://github.com/Haltian-project/Greenhouse/assets/28098368/6f4a7ed0-d7f4-4514-9bb4-e869aa7e9c12)
 
+## Team
+
+- **[Bao Tran](https://github.com/tranxbao)**
+
+- **[Tuukka Huru](https://github.com/TuukkaHuru)**
+
+- **[Osman Akbaba](https://github.com/OsmanAkbaba)**
+
+- **[Ziqi Li](https://github.com/ZiqiLi28)**
