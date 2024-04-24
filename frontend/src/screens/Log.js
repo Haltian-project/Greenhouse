@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
+import { useNavigate } from 'react-router-dom';
 
 const Log = () => {
     const [logData, setLogData] = useState(null);
+     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,6 +23,7 @@ const Log = () => {
 
     return (
         <div>
+         <button1 onClick={() => navigate('/')}>Back To Home</button1>
             {logData && (
                 <table className='log-table'>
                     <thead>
