@@ -90,8 +90,9 @@ Running the Application
 
 ### Captures of Application
 
-![Screenshot 2024-04-24 at 23 42 09](https://github.com/Haltian-project/Greenhouse/assets/28098368/e4150fca-5e2e-44f3-a43d-31bf2f85c8d4)
 ![Screenshot 2024-04-24 at 23 42 43](https://github.com/Haltian-project/Greenhouse/assets/28098368/33b8c236-1711-4ff6-8339-21a4c20636c9)
+
 ![Screenshot 2024-04-24 at 23 43 15](https://github.com/Haltian-project/Greenhouse/assets/28098368/530e29b1-52e1-4ea9-ab2d-56e37121c652)
+
 ![Screenshot 2024-04-24 at 23 43 29](https://github.com/Haltian-project/Greenhouse/assets/28098368/6f4a7ed0-d7f4-4514-9bb4-e869aa7e9c12)
 
