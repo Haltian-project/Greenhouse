@@ -75,18 +75,8 @@ Running the Application
 
 2. In a new terminal window, start the frontend: 
 
-  cd greenhouse/frontend
-  npm run start:frontend  
-
-# Environment Variables
-The application uses the following environment variables, which should be defined in .env files in the frontend and server directories:
-
-REACT_APP_SERVER_URL: The URL of the server (frontend only).
-MQTT_TOPIC: The MQTT topic that the server should subscribe to (server only).
-OPENWEATHER_API_KEY
-MongoDB_URI
-MQTT_BROKER_URL
-FINGRID_API_KEY
+   cd greenhouse/frontend
+   npm run start:frontend  
 
 ## Team
 
