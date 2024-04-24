@@ -24,7 +24,7 @@ Deployment: Vercel
 
 ## Main Features
 1. Displays air conditions in the greenhouse. Includes temperature, humidity, carbon dioxide, air pressure and light level.
-2. An alert is sent when a condition in the environment exceeds a threshold.
+2. An alert is sent when a condition in the environment exceeds a threshold. User can set the threshold by themselves.
 3. The Charts feature enables users to view historical data in a line graph format.
 4. Outside air condition display.
 5. Weather forecasting.
