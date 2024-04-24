@@ -1,37 +1,118 @@
 import React, { useState, useEffect } from 'react';
+import '../App.css'; 
 
 const Log = () => {
-
     const [logData, setLogData] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            // Fetch sensor data from backend API
-            const serverUrl = process.env.REACT_APP_SERVER_URL;
-            const serverPort = process.env.REACT_APP_SERVER_PORT;
-            const response = await fetch(
-              `${serverUrl}:${serverPort}/logdata`);
-            const data = await response.json();
-            setLogData(data);
-          } catch (error) {
-            console.error('Error fetching chart data:', error);
-          }
+            try {
+                // Fetch sensor data from backend API
+                const serverUrl = process.env.REACT_APP_SERVER_URL;
+                const serverPort = process.env.REACT_APP_SERVER_PORT;
+                const response = await fetch(`${serverUrl}:${serverPort}/logdata`);
+                const data = await response.json();
+                setLogData(data);
+            } catch (error) {
+                console.error('Error fetching chart data:', error);
+            }
         };
-    
+
         fetchData();
-      }, []);
-    
+    }, []);
 
-
-
-
-
-  return (
-    <div>
-        moro
-    </div>
-  )
+    return (
+        <div>
+            {logData && (
+                <table className='log-table'>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Temperature</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logData.temp.map((entry, index) => (
+                            <tr key={index}>
+                                <td>{entry.timestamp}</td>
+                                <td>{entry.value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Carbon Dioxide</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logData.carbonDioxide.map((entry, index) => (
+                            <tr key={index}>
+                                <td>{entry.timestamp}</td>
+                                <td>{entry.value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Humidity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logData.humd.map((entry, index) => (
+                            <tr key={index}>
+                                <td>{entry.timestamp}</td>
+                                <td>{entry.value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Air Pressure</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logData.airp.map((entry, index) => (
+                            <tr key={index}>
+                                <td>{entry.timestamp}</td>
+                                <td>{entry.value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Light Intensity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logData.lghtint.map((entry, index) => (
+                            <tr key={index}>
+                                <td>{entry.timestamp}</td>
+                                <td>{entry.value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Light</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {logData.lght.map((entry, index) => (
+                            <tr key={index}>
+                                <td>{entry.timestamp}</td>
+                                <td>{entry.value}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
+        </div>
+    );
 }
 
 export default Log;
