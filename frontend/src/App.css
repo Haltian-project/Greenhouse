@@ -34,6 +34,22 @@ a {
   text-decoration: none; 
   color: black; 
 }
+button {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2bb43d;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+}
+
+button:hover {
+  background-color: #ddd;
+}
 
 .data-container {
   margin-top: 20px;
@@ -86,6 +102,27 @@ a {
 .Home-data-item:hover {
   color: #ddd;
 }
+.Home-data-button {
+  display: block;
+  margin: 30px auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #2bb43d;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 200px;
+}
+
+.Home-data-button:hover {
+  background-color: #ddd;
+}
+
+ /* If alert */
+.data-out-of-limits {
+  background-color: #ff0000; 
+}
 
 .navbar {
   background-color: #2bb43d;
@@ -125,22 +162,6 @@ a {
   color: #ddd;
 }
 
-button {
-  display: block;
-  margin: 30px auto;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #2bb43d;
-  color: #000000;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 200px;
-}
-
-button:hover {
-  background-color: #ddd;
-}
 
 
 
@@ -267,3 +288,50 @@ button1 {
   text-align: center;
 }
 
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.input-container {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.input-label {
+  font-size: 18px;
+  margin-left: 9px;
+}
+
+.input-field {
+  margin-left: 10px;
+  padding: 5px;
+  width: calc(100% - 20px);
+}
+
+.submit-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}

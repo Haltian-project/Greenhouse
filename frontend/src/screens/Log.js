@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Log = () => {
     const [logData, setLogData] = useState(null);
-     const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,7 +23,7 @@ const Log = () => {
 
     return (
         <div>
-         <button1 onClick={() => navigate('/')}>Back To Home</button1>
+             <button1 onClick={() => navigate('/')}>Back To Home</button1>
             {logData && (
                 <table className='log-table'>
                     <thead>
@@ -117,4 +117,5 @@ const Log = () => {
 }
 
 export default Log;
+
 
