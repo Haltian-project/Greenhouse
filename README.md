@@ -29,8 +29,8 @@ Deployment: Vercel
 4. Outside air condition display.
 5. Weather forecasting.
 6. Real-time electricity prices are displayed and presented as a line graph.
-7. Backlog for values ​​that are not wanted
-8. You can adjust the desired values ​​from the settings, and when the values ​​are exceeded or under, the measured value turns red
+7. Backlog for values ​​from which you can view changes in the greenhouse
+
 
 ## Team
 
