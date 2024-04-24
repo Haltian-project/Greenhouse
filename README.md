@@ -4,7 +4,7 @@ The project aimed to create an application that monitors the air conditions insi
 
 ## Client Link
 
-https://greenhouse-app-ten.vercel.app/
+https://greenhouse-new-pi.vercel.app/
 
 ## Technologies
 
