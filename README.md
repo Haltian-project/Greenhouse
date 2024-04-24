@@ -6,6 +6,10 @@ The project aimed to create an application that monitors the air conditions insi
 
 https://greenhouse-new-pi.vercel.app/
 
+## Backend Link
+
+https://greenhouse-app-server.onrender.com
+
 ## Technologies
 
 Server-side: NodeJs
