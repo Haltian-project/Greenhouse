@@ -78,6 +78,9 @@ Running the Application
    cd greenhouse/frontend
    npm run start:frontend  
 
+## Captures of Application
+
+
 ## Team
 
 - **[Bao Tran](https://github.com/tranxbao)**
