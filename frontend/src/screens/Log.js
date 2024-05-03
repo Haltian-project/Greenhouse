@@ -24,6 +24,11 @@ const Log = () => {
     return (
         <div>
              <button1 onClick={() => navigate('/')}>Back To Home</button1>
+             <p>The log page stores values as a result of exceeding the threshold 
+                values set on the settings page. This helps users understand why and how 
+                deviations in certain environmental parameters are recorded in the log. 
+                The log provides users with important information about potential issues or 
+                alarming situations in the greenhouse.</p>
             {logData && (
                 <table className='log-table'>
                     <thead>
