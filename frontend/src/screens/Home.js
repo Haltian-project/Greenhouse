@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 import { FaThermometer, FaTint, FaWind, FaSmog, FaLightbulb, FaRegLightbulb, 
-  FaCloudSunRain, FaBolt, FaChartLine, FaSun, FaExclamation } from 'react-icons/fa'; // Importing icons from FontAwesome library
+  FaCloudSunRain, FaBolt, FaChartLine, FaSun, FaExclamation, 
+  FaPlug} from 'react-icons/fa'; // Importing icons from FontAwesome library
 
 const Home = () => {
   // State for sensor data and its limits
@@ -105,6 +106,9 @@ const Home = () => {
       </button>
       <button>
         <Link to="/price"><FaBolt/> Electricity price</Link>
+      </button>
+      <button>
+        <Link to="/consumption"><FaPlug/> Electricity consumption</Link>
       </button>
 
       <h1>Latest data:</h1> 
