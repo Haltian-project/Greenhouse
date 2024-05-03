@@ -11,10 +11,15 @@ const Charts = () => {
   const [showLight, setShowLight] = useState(false);
   const [showCO2, setShowCO2] = useState(false);
   const [showLightIntensity, setShowLightIntensity] = useState(false);
+  const [showOutsideTemp, setShowOutsideTemp] = useState(false);
+  const [showOutsideHumidity, setShowOutsideHumidity] = useState(false);
+  const [showOutsideAirPressure, setShowOutsideAirPressure] = useState(false);
+  const [showUVI, setShowUVI] = useState(false);
 
 
   const [chartData, setChartData] = useState(null);
   const navigate = useNavigate();
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,6 +37,23 @@ const Charts = () => {
 
     fetchData();
   }, []);
+
+  const [weatherChartData, setWeatherChartData] = useState(null);
+  useEffect(() => {
+    const fetchWeatherChartData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/weather`);
+        const data = await response.json();
+        setWeatherChartData(data);
+      } catch (error) {
+        console.error('Error fetching weather data:', error);
+      }
+    };
+
+    fetchWeatherChartData();
+  }, []);
+
+
 
   const options = {
     scales: {
@@ -134,6 +156,77 @@ const Charts = () => {
           />  
         </div>
       )}
+    
+      <h2>Outside data:</h2>
+
+      <button onClick={() => setShowOutsideTemp(!showOutsideTemp)}>
+        {showOutsideTemp ? 'Hide Outside Temp Chart' : 'Show Outside Temp Chart'}
+      </button>
+      {showOutsideTemp && (
+        <div className="chart-container">
+          <Line
+            data={{
+              labels: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.time)),
+              datasets: [
+                { label: 'Outside Temp', 
+                  data: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.temp_c)) }
+              ],
+            }}
+          /> 
+        </div>
+      )}
+      <button onClick={() => setShowOutsideHumidity(!showOutsideHumidity)}>
+        {showOutsideHumidity ? 'Hide Outside Humidity Chart' : 'Show Outside Humidity Chart'}
+      </button>
+      {showOutsideHumidity && (
+        <div className="chart-container">
+          <Line
+            data={{
+              labels: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.time)),
+              datasets: [
+                { label: 'Outside Humidity', 
+                  data: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.humidity)) }
+              ],
+            }}
+          /> 
+        </div>
+      )}
+
+      <button onClick={() => setShowOutsideAirPressure(!showOutsideAirPressure)}>
+        {showOutsideAirPressure ? 'Hide Outside Air Pressure Chart' : 'Show Outside Air Pressure Chart'}
+      </button>
+      {showOutsideAirPressure && (
+        <div className="chart-container">
+          <Line
+            data={{
+              labels: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.time)),
+              datasets: [
+                { label: 'Outside Air Pressure', 
+                  data: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.pressure_mb)) }
+              ],
+            }}
+          /> 
+        </div>
+      )}
+
+      <button onClick={() => setShowUVI(!showUVI)}>
+        {showUVI ? 'Hide UVI Chart' : 'Show UVI Chart'}
+      </button>
+      {showUVI && (
+        <div className="chart-container">
+          <Line
+            data={{
+              labels: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.time)),
+              datasets: [
+                { label: 'UVI', 
+                  data: weatherChartData?.forecast.forecastday.slice(0, 2).flatMap(day => day.hour.map(entry => entry.uv)) }
+              ],
+            }}
+          /> 
+        </div>
+      )}
+
+
     </div>
   );
 };

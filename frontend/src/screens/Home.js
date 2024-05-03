@@ -202,7 +202,7 @@ const Home = () => {
               <button className={`Home-data-button ${isLightIntensityLimits ? '' : 'data-out-of-limits'}`}>
                 <Link to="/charts">
                   <FaRegLightbulb size={30} />
-                  <p>Light intensity: {sensorData.lghtint} lux</p>
+                  <p>Light intensity: {sensorData.lghtint} nW/cm2</p>
                 </Link>
               </button>
             ) : (
