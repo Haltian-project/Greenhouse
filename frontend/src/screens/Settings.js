@@ -67,6 +67,7 @@ const Settings = () => {
   return (
     <div className="settings-container">
       <h1>Settings</h1>
+      <p>Set your limits here. These limits determine the minimum and maximum values for alerts shown on the front page and log.</p>
       <form onSubmit={handleSubmit} className="settings-form">
         {Object.entries(limits).map(([key, value]) => (
           <div key={key} className="input-container">
