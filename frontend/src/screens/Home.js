@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import { FaThermometer, FaTint, FaWind, FaSmog, FaLightbulb, FaRegLightbulb, FaCloudSunRain, FaBolt, FaChartLine } from 'react-icons/fa'; // Importing icons from FontAwesome library
+import { FaThermometer, FaTint, FaWind, FaSmog, FaLightbulb, FaRegLightbulb, 
+  FaCloudSunRain, FaBolt, FaChartLine, FaSun, FaExclamation } from 'react-icons/fa'; // Importing icons from FontAwesome library
 
 const Home = () => {
   // State for sensor data and its limits
@@ -84,7 +85,7 @@ const Home = () => {
 
     fetchWeatherData();
   }, []);
- 
+    
   // Check sensor data limits when sensorData or limits change
   useEffect(() => {
     if (sensorData) {
@@ -109,112 +110,112 @@ const Home = () => {
       <h1>Latest data:</h1> 
 
       <h2>Inside:</h2>
-{sensorData && (
-  <div className="Home-data-container">
-    <div className={`Home-data-item ${isTempLimits ? '' : 'data-out-of-limits'}`}>
-      {isTempLimits ? (
-        <button className={`Home-data-button ${isTempLimits ? '' : 'data-out-of-limits'}`}>
-          <Link to="/charts">
-            <FaThermometer size={30} />
-            <p>Inside Temperature: {sensorData.temp} °C</p>
-          </Link>
-        </button>
-      ) : (
-        <Link to="/log">
-          <button className={`Home-data-button ${isTempLimits ? '' : 'data-out-of-limits'}`}>
-            <FaThermometer size={30} />
-            <p>Inside Temperature out of limits: {sensorData.temp} °C</p>
-          </button>
-        </Link>
+      {sensorData && (
+        <div className="Home-data-container">
+          <div className={`Home-data-item ${isTempLimits ? '' : 'data-out-of-limits'}`}>
+            {isTempLimits ? (
+              <button className={`Home-data-button ${isTempLimits ? '' : 'data-out-of-limits'}`}>
+                <Link to="/charts">
+                  <FaThermometer size={30} />
+                  <p>Inside Temperature: {sensorData.temp} °C</p>
+                </Link>
+              </button>
+            ) : (
+              <Link to="/log">
+                <button className={`Home-data-button ${isTempLimits ? '' : 'data-out-of-limits'}`}>
+                  <FaExclamation size={30} />
+                  <p>Inside Temperature out of limits: {sensorData.temp} °C</p>
+                </button>
+              </Link>
+            )}
+          </div>
+          <div className={`Home-data-item ${isHumdLimits ? '' : 'data-out-of-limits'}`}>
+            {isHumdLimits ? (
+              <button className={`Home-data-button ${isHumdLimits ? '' : 'data-out-of-limits'}`}>
+                <Link to="/charts">
+                  <FaTint size={30} />
+                  <p>Inside Humidity: {sensorData.humd} %</p>
+                </Link>
+              </button>
+            ) : (
+              <Link to="/log">
+                <button className={`Home-data-button ${isHumdLimits ? '' : 'data-out-of-limits'}`}>
+                  <FaExclamation size={30} />
+                  <p>Inside Humidity out of limits: {sensorData.humd} %</p>
+                </button>
+              </Link>
+            )}
+          </div>
+          <div className={`Home-data-item ${isCarbonDioxideLimits ? '' : 'data-out-of-limits'}`}>
+            {isCarbonDioxideLimits ? (
+              <button className={`Home-data-button ${isCarbonDioxideLimits ? '' : 'data-out-of-limits'}`}>
+                <Link to="/charts">
+                  <FaSmog size={30} />
+                  <p>CO2: {sensorData.carbonDioxide} ppm</p>
+                </Link>
+              </button>
+            ) : (
+              <Link to="/log">
+                <button className={`Home-data-button ${isCarbonDioxideLimits ? '' : 'data-out-of-limits'}`}>
+                  <FaExclamation size={30} />
+                  <p>CO2 out of limits: {sensorData.carbonDioxide} ppm</p>
+                </button>
+              </Link>
+            )}
+          </div>
+          <div className={`Home-data-item ${isAirPressureLimits ? '' : 'data-out-of-limits'}`}>
+            {isAirPressureLimits ? (
+              <button className={`Home-data-button ${isAirPressureLimits ? '' : 'data-out-of-limits'}`}>
+                <Link to="/charts">
+                  <FaWind size={30} />
+                  <p>Inside Airpressure: {sensorData.airp} pa</p>
+                </Link>
+              </button>
+            ) : (
+              <Link to="/log">
+                <button className={`Home-data-button ${isAirPressureLimits ? '' : 'data-out-of-limits'}`}>
+                  <FaExclamation size={30} />
+                  <p>Inside Airpressure out of limits: {sensorData.airp} pa</p>
+                </button>
+              </Link>
+            )}
+          </div>
+          <div className={`Home-data-item ${isLightLimits ? '' : 'data-out-of-limits'}`}>
+            {isLightLimits ? (
+              <button className={`Home-data-button ${isLightLimits ? '' : 'data-out-of-limits'}`}>
+                <Link to="/charts">
+                  <FaLightbulb size={30} />
+                  <p>Light: {sensorData.lght} lux</p>
+                </Link>
+              </button>
+            ) : (
+              <Link to="/log">
+                <button className={`Home-data-button ${isLightLimits ? '' : 'data-out-of-limits'}`}>
+                  <FaExclamation size={30} />
+                  <p>Light out of limits: {sensorData.lght} lux</p>
+                </button>
+              </Link>
+            )}
+          </div>
+          <div className={`Home-data-item ${isLightIntensityLimits ? '' : 'data-out-of-limits'}`}>
+            {isLightIntensityLimits ? (
+              <button className={`Home-data-button ${isLightIntensityLimits ? '' : 'data-out-of-limits'}`}>
+                <Link to="/charts">
+                  <FaRegLightbulb size={30} />
+                  <p>Light intensity: {sensorData.lghtint} lux</p>
+                </Link>
+              </button>
+            ) : (
+              <Link to="/log">
+                <button className={`Home-data-button ${isLightIntensityLimits ? '' : 'data-out-of-limits'}`}>
+                  <FaExclamation size={30} />
+                  <p>Light intensity out of limits: {sensorData.lghtint} nW/cm2</p>
+                </button>
+              </Link>
+            )}
+          </div>
+        </div>
       )}
-    </div>
-    <div className={`Home-data-item ${isHumdLimits ? '' : 'data-out-of-limits'}`}>
-      {isHumdLimits ? (
-        <button className={`Home-data-button ${isHumdLimits ? '' : 'data-out-of-limits'}`}>
-          <Link to="/charts">
-            <FaTint size={30} />
-            <p>Inside Humidity: {sensorData.humd} %</p>
-          </Link>
-        </button>
-      ) : (
-        <Link to="/log">
-          <button className={`Home-data-button ${isHumdLimits ? '' : 'data-out-of-limits'}`}>
-            <FaTint size={30} />
-            <p>Inside Humidity out of limits: {sensorData.humd} %</p>
-          </button>
-        </Link>
-      )}
-    </div>
-    <div className={`Home-data-item ${isCarbonDioxideLimits ? '' : 'data-out-of-limits'}`}>
-      {isCarbonDioxideLimits ? (
-        <button className={`Home-data-button ${isCarbonDioxideLimits ? '' : 'data-out-of-limits'}`}>
-          <Link to="/charts">
-            <FaSmog size={30} />
-            <p>CO2: {sensorData.carbonDioxide} ppm</p>
-          </Link>
-        </button>
-      ) : (
-        <Link to="/log">
-          <button className={`Home-data-button ${isCarbonDioxideLimits ? '' : 'data-out-of-limits'}`}>
-            <FaSmog size={30} />
-            <p>CO2 out of limits: {sensorData.carbonDioxide} ppm</p>
-          </button>
-        </Link>
-      )}
-    </div>
-    <div className={`Home-data-item ${isAirPressureLimits ? '' : 'data-out-of-limits'}`}>
-      {isAirPressureLimits ? (
-        <button className={`Home-data-button ${isAirPressureLimits ? '' : 'data-out-of-limits'}`}>
-          <Link to="/charts">
-            <FaWind size={30} />
-            <p>Inside Airpressure: {sensorData.airp} pa</p>
-          </Link>
-        </button>
-      ) : (
-        <Link to="/log">
-          <button className={`Home-data-button ${isAirPressureLimits ? '' : 'data-out-of-limits'}`}>
-            <FaWind size={30} />
-            <p>Inside Airpressure out of limits: {sensorData.airp} pa</p>
-          </button>
-        </Link>
-      )}
-    </div>
-    <div className={`Home-data-item ${isLightLimits ? '' : 'data-out-of-limits'}`}>
-      {isLightLimits ? (
-        <button className={`Home-data-button ${isLightLimits ? '' : 'data-out-of-limits'}`}>
-          <Link to="/charts">
-            <FaLightbulb size={30} />
-            <p>Light: {sensorData.lght} lux</p>
-          </Link>
-        </button>
-      ) : (
-        <Link to="/log">
-          <button className={`Home-data-button ${isLightLimits ? '' : 'data-out-of-limits'}`}>
-            <FaLightbulb size={30} />
-            <p>Light out of limits: {sensorData.lght} lux</p>
-          </button>
-        </Link>
-      )}
-    </div>
-    <div className={`Home-data-item ${isLightIntensityLimits ? '' : 'data-out-of-limits'}`}>
-      {isLightIntensityLimits ? (
-        <button className={`Home-data-button ${isLightIntensityLimits ? '' : 'data-out-of-limits'}`}>
-          <Link to="/charts">
-            <FaRegLightbulb size={30} />
-            <p>Light intensity: {sensorData.lghtint} lux</p>
-          </Link>
-        </button>
-      ) : (
-        <Link to="/log">
-          <button className={`Home-data-button ${isLightIntensityLimits ? '' : 'data-out-of-limits'}`}>
-            <FaRegLightbulb size={30} />
-            <p>Light intensity out of limits: {sensorData.lghtint} lux</p>
-          </button>
-        </Link>
-      )}
-    </div>
-  </div>
-)}
 
 
       <h2>Outside:</h2>
@@ -223,7 +224,7 @@ const Home = () => {
           <button>
             <Link to="/forecast">
               <FaThermometer size={30} />
-              <p>Outside Temperature: {weatherData ? weatherData.main.temp : 'Loading...'} °C</p>
+              <p>Outside Temperature: {weatherData ? weatherData.current.temp_c : 'Loading...'} °C</p>
             </Link>
           </button>
         </div>
@@ -231,7 +232,7 @@ const Home = () => {
           <button>
             <Link to="/forecast">
               <FaTint size={30} />
-              <p>Outside Humidity: {weatherData ? weatherData.main.humidity : 'Loading...'} %</p>
+              <p>Outside Humidity: {weatherData ? weatherData.current.humidity : 'Loading...'} %</p>
             </Link>
           </button>
         </div>
@@ -239,8 +240,32 @@ const Home = () => {
           <button>
             <Link to="/forecast">
               <FaWind size={30} />
-              <p>Outside Airpressure: {weatherData ? weatherData.main.pressure : 'Loading...'} hpa</p>
+              <p>Outside Airpressure: {weatherData ? weatherData.current.pressure_mb : 'Loading...'} hpa</p>
             </Link>
+          </button>
+        </div>
+        <div className="Home-data-item">
+          <button>
+            <Link to="/charts">
+              <FaSun size={30} />
+              <p>Uv index: {weatherData ? weatherData.current.uv : 'Loading...'} </p>
+            </Link>
+          </button>
+        </div>
+        <div className="Home-data-item">
+        <button>
+            <Link to="/charts">
+              <FaSun size={30} />
+              <p>Sunrise: {weatherData ? weatherData.forecast.forecastday[0].astro.sunrise : 'Loading...'} </p>
+              </Link>
+          </button>
+        </div>
+        <div className="Home-data-item">
+        <button>
+            <Link to="/charts">
+              <FaSun size={30} />
+              <p>Sunset: {weatherData ? weatherData.forecast.forecastday[0].astro.sunset : 'Loading...'} </p>
+              </Link>
           </button>
         </div>
       </div>
