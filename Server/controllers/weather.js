@@ -5,7 +5,7 @@ dotenv.config();
 export const getWeather = (req,res) =>{
     const fetchData = async () => {
         try {
-          const apiKey = process.env.UV_API_KEY; // Store your API key in environment variables
+          const apiKey = process.env.WEATHER_API_KEY; // Store your API key in environment variables
            
           const response = await fetch(
             `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Oulu&days=7`
