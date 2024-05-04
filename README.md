@@ -115,7 +115,7 @@ REACT_APP_SERVER_URL=http://localhost:your_port_number
 
 ### Captures of Application
 
-![Screenshot 2024-04-24 at 23 42 43](https://github.com/Haltian-project/Greenhouse/assets/28098368/33b8c236-1711-4ff6-8339-21a4c20636c9)
+![Screenshot 2024-04-24 at 23 42 43](https://github.com/Haltian-project/Greenhouse/assets/143429680/a29773cd-f779-40cc-b189-a89f23d3e9e9)
 
 ![Screenshot 2024-04-24 at 23 43 15](https://github.com/Haltian-project/Greenhouse/assets/28098368/530e29b1-52e1-4ea9-ab2d-56e37121c652)
 
