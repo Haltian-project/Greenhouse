@@ -1,7 +1,7 @@
 # Greenhouse Monitoring System
 
 
-The project aimed to create an application that monitors the air conditions inside a greenhouse using the Thingsee Air and Environment Sensor. The app would display temperature, humidity, carbon dioxide, air pressure, light level, and alert the user if any readings were concerning. The app included a chart feature for users to view past data. The app also has a weather forecast as well as the ability to view electricity prices to help users better manage their crops in the greenhouse.
+The project aimed to create an application that monitors the air conditions inside a greenhouse using the Thingsee Air and Environment Sensor. The app would display temperature, humidity, carbon dioxide, air pressure, light level, and alert the user if any readings were concerning. The app included a chart feature for users to view past data. The app also has a weather forecast as well as the ability to view electricity prices and electricity consumption to help users better manage their crops in the greenhouse.
 
 ## Client Link
 
@@ -34,15 +34,30 @@ Deployment: Vercel, Render
 4. Outside air condition display.
 5. Weather forecasting and presented as a line graph.
 6. Real-time electricity prices are displayed and presented as a line graph.
-7. Backlog for values ​​from which you can view changes in the greenhouse
+7. Energy consumption currently displays electricity usage data from Finland. If available, this could be replaced with data specific to the greenhouse's electricity usage.
+8. Backlog for values ​​from which you can view changes in the greenhouse
 
 # Project Structure
 
 The project is divided into two main parts:
 
-- `frontend/`: This directory contains the React application that provides the user interface for the monitoring system.
-- `server/`: This directory contains the Node.js server that handles communication with the MQTT broker and provides an API for the frontend.
+# `frontend/`: 
+-**This directory contains the React application that provides the user interface for the monitoring system. Here's a breakdown of its contents:**
+- **components/**: Here you'll find React components that are part of the user interface. For example, navbar.js contains the component for the navigation bar.
+- **screens/**: This directory contains various screens that form different views of the application. For example, home.js, charts.js, etc.
+- **app.js**: This file is the main component of the application, defining its structure and routing.
+- **app.css**: Here you'll find the general stylesheet for the application.
+- **env.js**: This file may contain environment variables used by the application, such as API keys and other configuration data.
 
+# `server/`: 
+-**This directory contains the Node.js server responsible for managing the backend logic of the application. Here's a breakdown of its contents:**
+- **certificates/**: Stores certificates required for secure communication with the MQTT broker or other services.
+- **controllers/**: Contains various controller modules, each responsible for handling specific API routes and business logic.
+- **routers/**: Houses router modules that define API endpoints and their corresponding controller functions. Each router typically represents a different area of functionality within the application.
+- **services/**: Contains service modules that encapsulate functionality related to external services, such as MQTT communication (mqtt.cjs).
+- **utils/**: Includes utility modules used across the server codebase, such as database handling utilities (db.jcs).
+- **.env**: Configuration file where sensitive information like API keys and database URIs are stored securely.
+- **index.js**: Entry point for the server application, where the server is instantiated and configured to listen for incoming requests.
 ## Getting Started
 
 ### Prerequisites
@@ -63,12 +78,27 @@ The project is divided into two main parts:
 
 3. Install the dependencies for the frontend
    ```sh
-    cd greenhouse/frtontend
+    cd greenhouse/frontend
     npm install
 
-Running the Application
+### Configuration
+Create a .env file in the server directory to store your API keys and other sensitive information:
+   ```sh
+   OPENWEATHER_API_KEY=your_openweather_api_key_here
+   MongoDB_URI=your_mongodb_uri_here
+   FINGRID_API_KEY=your_fingrid_api_key_here
+   WEATHER_API_KEY=your_weather_api_key_here
+   MQTT_BROKER_URL=your_mqtt_broker_url_here
+   MQTT_TOPIC=your_mqtt_topic_here
+   ```
+Create a .env file in the frontend directory to define the server URL:
+```sh
+REACT_APP_SERVER_URL=http://localhost:your_port_number
+ ```
+      
+### Running the Application
 
-1. Start the serve:
+1. Start the server:
    ```sh
    cd greenhouse/server
    npm run start
