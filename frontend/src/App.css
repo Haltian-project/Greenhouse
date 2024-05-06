@@ -337,3 +337,66 @@ button1 {
 .submit-button:hover {
   background-color: #0056b3;
 }
+
+
+  button3 {
+    margin-top: 20px;
+    margin-left: 400px;
+    padding: 10px 5px;
+    background-color: #007bff;
+    border-radius: 10%;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+p {
+  text-align: left;
+  display: block; /* Muuttaa span-lohkoksi */
+}
+
+.info-button {
+  /* Lisää muita tyylejä tarvittaessa */
+  border: 2px solid #2bb43d; /* Kehän tyyli */
+  border-radius: 5px; /* Pyöristää reunat */
+  padding: 10px 10px; /* Lisää tilaa napin sisällä */
+  background-color: transparent; /* Poistaa taustan */
+  color: #333; /* Tekstin väri */
+  font-size: 16px; /* Tekstin koko */
+  cursor: pointer; /* Osoittimen tyyppi */
+  transition: background-color 0.3s ease; /* Lisää siirtymäefekti */
+  margin-left: 100px; /* Lisää marginaalia vasemmalle */
+}
+
+
+.info-button:hover {
+  background-color: #2bb43d; /* Taustaväri hiiren ollessa päällä */
+  color: #fff; /* Tekstin väri hiiren ollessa päällä */
+}
+
+.info-modal {
+  /* Lisää tyyliä tarvittaessa */
+}
+
+.info-content {
+  position: relative; /* Sijoitetaan suhteellisesti sisältöön nähden */
+}
+
+.info-text {
+/* Lisää tyyliä tarvittaessa */
+border: 2px solid #2bb43d; /* Kehän tyyli */
+border-radius: 5px; /* Pyöristää reunat */
+padding: 10px; /* Lisää tilaa sisällä */
+background-color: #fff; /* Taustaväri */
+position: absolute; /* Sijoitetaan absoluuttisesti */
+top: 100px; /* Asettaa yläreunan 50 pikseliä ylemmäksi */
+left: 20%; /* Asettaa vasemman reunan 50%: iin näytön leveydestä */
+transform: translateX(-50%); /* Siirtää vasenta reunaa 50% vasemmalle */
+}
+
+.close {
+  display: none;
+}
+

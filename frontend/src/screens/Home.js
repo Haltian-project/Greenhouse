@@ -14,6 +14,11 @@ const Home = () => {
   const [isAirPressureLimits, setIsAirPressureLimits] = useState(true);
   const [isLightLimits, setIsLightLimits] = useState(true);
   const [isLightIntensityLimits, setIsLightIntensityLimits] = useState(true);
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setIsInfoVisible(!isInfoVisible);
+  };
   
   // State for sensor data limits
   const [limits, setLimits] = useState({
@@ -98,6 +103,27 @@ const Home = () => {
   return (
     <div>
       <h1>Home</h1>
+      <button3 className="info-button" onClick={toggleInfo}>
+        Info
+      </button3>
+       {/* Info Modal */}
+       {isInfoVisible && (
+        <div className="info-modal">
+          <div className="info-content">
+          <span className="close" onClick={toggleInfo}>&times;</span>
+          <div className="info-text">  
+                  
+          <p> Webapp is made by students of Oulu University of Applied Sciences.<br></br>This is company-oriented project made with company called Haltian. <br></br> 
+           We made a web application that measures different values from sensors that Haltian provided. <br></br> 
+           You can browse collected data from pages, that are found in the navigation bar. <br></br>
+           
+           </p>
+          
+                                
+                </div>
+              </div>
+            </div>
+          )}
       <button>
         <Link to="/charts"><FaChartLine/> Go to Charts</Link>
       </button>
