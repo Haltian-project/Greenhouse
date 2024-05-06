@@ -16,6 +16,12 @@ const Charts = () => {
   const [showOutsideAirPressure, setShowOutsideAirPressure] = useState(false);
   const [showUVI, setShowUVI] = useState(false);
 
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setIsInfoVisible(!isInfoVisible);
+  };
+
 
   const [chartData, setChartData] = useState(null);
   const navigate = useNavigate();
@@ -66,7 +72,30 @@ const Charts = () => {
   return (
     <div>
       <button1 onClick={() => navigate('/')}>Back To Home</button1>
-      <h1>Greenhouse</h1>      
+      <h1>Greenhouse</h1>  
+
+      <button className="info-button" onClick={toggleInfo}>
+        Info
+      </button>
+       {/* Info Modal */}
+       {isInfoVisible && (
+        <div className="info-modal">
+          <div className="info-content">
+          <span className="close" onClick={toggleInfo}>&times;</span>
+          <div className="info-text">  
+
+          <p> Webapp is made by students of Oulu University of Applied Sciences.<br></br>This is company-oriented project made with company called Haltian. <br></br> 
+           We made a web application that measures different values from sensors that Haltian provided. <br></br> 
+           You can browse collected data from pages, that are found in the navigation bar. <br></br>
+
+           </p>
+
+
+                </div>
+              </div>
+            </div>
+          )}
+
       <button onClick={() => setShowInsideTemp(!showInsideTemp)}>
         {showInsideTemp ? 'Hide Inside Temp Chart' : 'Show Inside Temp Chart'}
       </button>

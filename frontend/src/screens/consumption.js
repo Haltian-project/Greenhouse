@@ -9,6 +9,12 @@ const Consumption = () => {
     const [consumptionData, setConsumptionData] = useState(null);
     const navigate = useNavigate();
 
+    const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setIsInfoVisible(!isInfoVisible);
+  };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -58,12 +64,31 @@ const Consumption = () => {
 
     return (
         <div className="PriceContainer">
-            <button onClick={() => navigate('/')}>Back To Home</button>
+            <button1 onClick={() => navigate('/')}>Back To Home</button1>
             <h2>Electricity consumption</h2>
+            <button className="info-button" onClick={toggleInfo}>
+        Info
+      </button>
+       {/* Info Modal */}
+       {isInfoVisible && (
+        <div className="info-modal">
+          <div className="info-content">
+          <span className="close" onClick={toggleInfo}>&times;</span>
+          <div className="info-text">  
+
+          <p> Electricity consumption data in Finland is provided in 15-minute intervals. <br></br>
+It could be replaced with data specific to the greenhouse's electricity<br></br> usage  if such 
+information were available.  <br></br>
+
+           </p>
+
+
+                </div>
+              </div>
+            </div>
+          )}
             <p>
-Electricity consumption data in Finland is provided in 15-minute intervals. 
-It could be replaced with data specific to the greenhouse's electricity usage if such 
-information were available. </p>
+</p>
             {consumptionData ? (
                 <div>
                     <table className="PriceTable">

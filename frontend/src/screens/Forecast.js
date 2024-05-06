@@ -5,7 +5,14 @@ import { Chart } from "chart.js/auto";
 import { useNavigate } from 'react-router-dom';
 
 
+
 const Forecast = () => {
+
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+  const toggleInfo = () => {
+    setIsInfoVisible(!isInfoVisible);
+  };
   const [forecastData, setForecastData] = useState(null);
   
   const navigate = useNavigate();
@@ -71,7 +78,21 @@ const Forecast = () => {
 
   return (
     <div className="forecast-container">
-      <button onClick={() => navigate('/')}>Back To Home</button>
+      <button className="info-button" onClick={toggleInfo}>
+        Info
+      </button>
+       {/* Info Modal */}
+       {isInfoVisible && (
+        <div className="info-modal">
+          <div className="info-content">
+          <span className="close" onClick={toggleInfo}>&times;</span>
+          <div className="info-text">  
+          <p>In this page you are able to seek real-time forecast</p>
+                </div>
+              </div>
+            </div>
+          )}
+      <button1 onClick={() => navigate('/')}>Back To Home</button1>
       <h2 className="forecast-heading">Weather Forecast</h2>
       {forecastData ? (
         <div>

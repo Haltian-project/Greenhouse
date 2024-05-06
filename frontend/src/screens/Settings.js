@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css'; 
+import { useNavigate } from 'react-router-dom';
+
 
 const Settings = () => {
   const [limits, setLimits] = useState({
@@ -16,7 +18,7 @@ const Settings = () => {
     lightIntensityMin: 0,
     lightIntensityMax: 0,
   });
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchLimits = async () => {
       try {
@@ -66,6 +68,7 @@ const Settings = () => {
 
   return (
     <div className="settings-container">
+      <button1 onClick={() => navigate('/')}>Back To Home</button1>
       <h1>Settings</h1>
       <p>Set your limits here. These limits determine the minimum and maximum values for alerts shown 
         on the front page and log. They represent the acceptable range for various environmental 

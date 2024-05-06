@@ -6,6 +6,12 @@ const Log = () => {
     const [logData, setLogData] = useState(null);
     const navigate = useNavigate();
 
+    const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+    const toggleInfo = () => {
+      setIsInfoVisible(!isInfoVisible);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -24,11 +30,31 @@ const Log = () => {
     return (
         <div>
              <button1 onClick={() => navigate('/')}>Back To Home</button1>
-             <p>The log page stores values as a result of exceeding the threshold 
-                values set on the settings page. This helps users understand why and how 
-                deviations in certain environmental parameters are recorded in the log. 
-                The log provides users with important information about potential issues or 
-                alarming situations in the greenhouse.</p>
+
+             <button className="info-button" onClick={toggleInfo}>
+        Info
+      </button>
+       {/* Info Modal */}
+       {isInfoVisible && (
+        <div className="info-modal">
+          <div className="info-content">
+          <span className="close" onClick={toggleInfo}>&times;</span>
+          <div className="info-text">  
+
+          <p> 
+          The log page stores values as a result of exceeding the threshold 
+            values set on the settings page. <br></br>This helps users understand why and how 
+            deviations in certain environmental parameters are recorded in the log. <br></br>
+            The log provides users with important information about potential issues or 
+            alarming situations in the greenhouse.
+           </p>
+
+
+                </div>
+              </div>
+            </div>
+          )}
+            
             {logData && (
                 <table className='log-table'>
                     <thead>

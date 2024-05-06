@@ -103,9 +103,9 @@ const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      <button3 className="info-button" onClick={toggleInfo}>
+      <button className="info-button" onClick={toggleInfo}>
         Info
-      </button3>
+      </button>
        {/* Info Modal */}
        {isInfoVisible && (
         <div className="info-modal">

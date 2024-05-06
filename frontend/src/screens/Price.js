@@ -8,6 +8,12 @@ const Price = () => {
     const [priceData, setPriceData] = useState(null);
     const navigate = useNavigate();
 
+    const [isInfoVisible, setIsInfoVisible] = useState(false);
+
+    const toggleInfo = () => {
+        setIsInfoVisible(!isInfoVisible);
+  };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -77,6 +83,21 @@ const Price = () => {
     return (
         <div className="PriceContainer">
             <button1 onClick={() => navigate('/')}>Back To Home</button1>
+            <button className="info-button" onClick={toggleInfo}>
+                Info
+            </button>
+                {/* Info Modal */}
+       {isInfoVisible && (
+        <div className="info-modal">
+          <div className="info-content">
+          <span className="close" onClick={toggleInfo}>&times;</span>
+          <div className="info-text">  
+
+          <p>In this page you are able to seek SPOT-price.  </p>
+                </div>
+              </div>
+            </div>
+          )}
             <h2>Electricity price</h2>
             {priceData ? (
                 <div>
