@@ -363,15 +363,9 @@ button1 {
 }
 
 .info-text {
-/* Lisää tyyliä tarvittaessa */
-border: 2px solid #2bb43d; /* Kehän tyyli */
-border-radius: 5px; /* Pyöristää reunat */
-padding: 2px; /* Lisää tilaa sisällä */
-background-color: #fff; /* Taustaväri */
-position: absolute; 
-top: 15px; /* Asettaa yläreunan 50 pikseliä ylemmäksi */
-left: 20%; /* Asettaa vasemman reunan 50%: iin näytön leveydestä */
-transform: translateX(-43%); /* Siirtää vasenta reunaa 50% vasemmalle */
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .close {
