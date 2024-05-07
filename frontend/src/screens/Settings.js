@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Settings = () => {
+  // State to store the limits 
   const [limits, setLimits] = useState({
     tempMin: 0,
     tempMax: 0,
@@ -18,7 +19,10 @@ const Settings = () => {
     lightIntensityMin: 0,
     lightIntensityMax: 0,
   });
+
   const navigate = useNavigate();
+
+  // Fetch limits from the server when the component mounts
   useEffect(() => {
     const fetchLimits = async () => {
       try {
@@ -33,11 +37,13 @@ const Settings = () => {
     fetchLimits();
   }, []);
 
+  // Handle input change for setting limits
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLimits({ ...limits, [name]: value });
   };
 
+  // Handle form submission to save limits
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -49,6 +55,7 @@ const Settings = () => {
     }
   };
 
+  // Function to save limits to MongoDB
   const saveLimitsToMongoDB = async (limits) => {
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/limits`, {

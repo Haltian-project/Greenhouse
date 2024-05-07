@@ -7,15 +7,21 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Forecast = () => {
+  // State variable for weather forecast data
+  const [forecastData, setForecastData] = useState(null);
 
+  // State variable for showing/hiding info modal
   const [isInfoVisible, setIsInfoVisible] = useState(false);
 
+  // Function to toggle info modal visibility
   const toggleInfo = () => {
     setIsInfoVisible(!isInfoVisible);
   };
-  const [forecastData, setForecastData] = useState(null);
-  
+
+  // React router navigation hook
   const navigate = useNavigate();
+
+  // Fetch weather forecast data from backend API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,6 +37,7 @@ const Forecast = () => {
     fetchData();
   }, []);
 
+  // Function to format date string
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate().toString().padStart(2, '0');
@@ -40,6 +47,7 @@ const Forecast = () => {
     return `${day}.${month}. ${hours}:${minutes}`;
   };
 
+  // Chart data for weather forecast
   const chartData = {
     labels: forecastData?.list?.map(item => formatDate(item.dt_txt)) || [],
     datasets: [
@@ -67,33 +75,39 @@ const Forecast = () => {
     ]
   };
 
+  // Chart options
   const options = {
     scales: {
       y: {
         beginAtZero: true,
-        // Voit määrittää min ja max tarpeen mukaan
+        // You can specify min and max as needed
       }
     }
   };
 
   return (
     <div className="forecast-container">
+      {/* Button to toggle info modal visibility */}
       <button className="info-button" onClick={toggleInfo}>
         Info
       </button>
-       {/* Info Modal */}
-       {isInfoVisible && (
+      {/* Info Modal */}
+      {isInfoVisible && (
         <div className="info-modal">
           <div className="info-content">
-          <span className="close" onClick={toggleInfo}>&times;</span>
-          <div className="info-text">  
-          <p>In this page you are able to seek real-time forecast</p>
-                </div>
-              </div>
+            <span className="close" onClick={toggleInfo}>&times;</span>
+            <div className="info-text">
+              {/* Info text */}
+              <p>In this page you are able to seek real-time forecast</p>
             </div>
-          )}
+          </div>
+        </div>
+      )}
+      {/* Navigation button to return home */}
       <button1 onClick={() => navigate('/')}>Back To Home</button1>
+      {/* Heading for weather forecast */}
       <h2 className="forecast-heading">Weather Forecast</h2>
+      {/* Display weather forecast data */}
       {forecastData ? (
         <div>
           {forecastData.city ? (
@@ -104,6 +118,7 @@ const Forecast = () => {
           ) : (
             <p>City information not available</p>
           )}
+          {/* Table for displaying weather forecast data */}
           <h3 className="forecast-subheading">Forecast:</h3>
           <table className="forecast-table">
             <thead>
@@ -127,6 +142,7 @@ const Forecast = () => {
               ))}
             </tbody>
           </table>
+          {/* Weather forecast chart */}
           <h3 className="forecast-subheading">Weather forecast chart:</h3>
           <Line data={chartData} options={options} />
         </div>
@@ -138,4 +154,3 @@ const Forecast = () => {
 };
 
 export default Forecast;
-

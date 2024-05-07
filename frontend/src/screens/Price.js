@@ -12,11 +12,12 @@ const Price = () => {
 
     const toggleInfo = () => {
         setIsInfoVisible(!isInfoVisible);
-  };
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                // Fetch electricity price data from backend API
                 const response = await fetch(
                     `${process.env.REACT_APP_SERVER_URL}/price`
                 );
@@ -52,27 +53,28 @@ const Price = () => {
         return priceWithVAT;
     }
 
-   // Sort time labels and corresponding data
-   const sortedData = priceData ? [...priceData.data].reverse() : [];
-   const chartData = {
-       labels: sortedData.map(item => formatDate2(item.startTime)),
-       datasets: [
-           {
-               label: 'Price (cents/KWh)',
-               data: sortedData.map(item => formatPrice(item.value)),
-               fill: false,
-               borderColor: 'rgba(75,192,192,1)',
-               tension: 0.1
-           },
-           {
-               label: 'Price with VAT (cents/KWh)',
-               data: sortedData.map(item => formatPriceWithVAT(item.value)),
-               fill: false,
-               borderColor: 'rgba(192,75,192,1)',
-               tension: 0.1
-           }
-       ]
-   };
+    // Sort time labels and corresponding data
+    const sortedData = priceData ? [...priceData.data].reverse() : [];
+    const chartData = {
+        labels: sortedData.map(item => formatDate2(item.startTime)),
+        datasets: [
+            {
+                label: 'Price (cents/KWh)',
+                data: sortedData.map(item => formatPrice(item.value)),
+                fill: false,
+                borderColor: 'rgba(75,192,192,1)',
+                tension: 0.1
+            },
+            {
+                label: 'Price with VAT (cents/KWh)',
+                data: sortedData.map(item => formatPriceWithVAT(item.value)),
+                fill: false,
+                borderColor: 'rgba(192,75,192,1)',
+                tension: 0.1
+            }
+        ]
+    };
+
     const options = {
         scales: {
           y: {
@@ -80,24 +82,25 @@ const Price = () => {
           }
         }
       };
+
     return (
         <div className="PriceContainer">
             <button1 onClick={() => navigate('/')}>Back To Home</button1>
             <button className="info-button" onClick={toggleInfo}>
                 Info
             </button>
-                {/* Info Modal */}
-       {isInfoVisible && (
-        <div className="info-modal">
-          <div className="info-content">
-          <span className="close" onClick={toggleInfo}>&times;</span>
-          <div className="info-text">  
-
-          <p>In this page you are able to seek SPOT-price.  </p>
+            {/* Info Modal */}
+            {isInfoVisible && (
+                <div className="info-modal">
+                    <div className="info-content">
+                        <span className="close" onClick={toggleInfo}>&times;</span>
+                        <div className="info-text">  
+                            {/* Info text */}
+                            <p>In this page you are able to seek SPOT-price.</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          )}
+            )}
             <h2>Electricity price</h2>
             {priceData ? (
                 <div>
