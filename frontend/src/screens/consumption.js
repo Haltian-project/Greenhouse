@@ -6,15 +6,21 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Consumption = () => {
+    // State variable for storing consumption data
     const [consumptionData, setConsumptionData] = useState(null);
+    
+    // React router navigation hook
     const navigate = useNavigate();
 
+    // State variable for showing/hiding info modal
     const [isInfoVisible, setIsInfoVisible] = useState(false);
 
-  const toggleInfo = () => {
-    setIsInfoVisible(!isInfoVisible);
-  };
+    // Function to toggle info modal visibility
+    const toggleInfo = () => {
+        setIsInfoVisible(!isInfoVisible);
+    };
 
+    // Fetch consumption data from backend API
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -31,6 +37,7 @@ const Consumption = () => {
         fetchData();
     }, []);
 
+    // Format date string
     const formatDate2 = (dateString) => {
         const date = new Date(dateString);
         const hours = date.getHours().toString().padStart(2, '0');
@@ -39,8 +46,10 @@ const Consumption = () => {
         return `${formattedDate} ${hours}:${minutes}`;
     };
 
-    // Sort time labels and corresponding data
+    // Sort consumption data by time
     const sortedData = consumptionData ? [...consumptionData.data].reverse() : [];
+    
+    // Chart data
     const chartData = {
         labels: sortedData.map(item => formatDate2(item.startTime)),
         datasets: [
@@ -54,6 +63,7 @@ const Consumption = () => {
         ]
     };
 
+    // Chart options
     const options = {
         scales: {
             y: {
@@ -67,28 +77,22 @@ const Consumption = () => {
             <button1 onClick={() => navigate('/')}>Back To Home</button1>
             <h2>Electricity consumption</h2>
             <button className="info-button" onClick={toggleInfo}>
-        Info
-      </button>
-       {/* Info Modal */}
-       {isInfoVisible && (
-        <div className="info-modal">
-          <div className="info-content">
-          <span className="close" onClick={toggleInfo}>&times;</span>
-          <div className="info-text">  
-
-          <p> Electricity consumption data in Finland is provided in 15-minute intervals. <br></br>
-It could be replaced with data specific to the greenhouse's electricity<br></br> usage  if such 
-information were available.  <br></br>
-
-           </p>
-
-
+                Info
+            </button>
+            {/* Info Modal */}
+            {isInfoVisible && (
+                <div className="info-modal">
+                    <div className="info-content">
+                        <span className="close" onClick={toggleInfo}>&times;</span>
+                        <div className="info-text">  
+                            <p> Electricity consumption data in Finland is provided in 15-minute intervals. <br></br>
+                                It could be replaced with data specific to the greenhouse's electricity<br></br> usage  if such 
+                                information were available.  <br></br>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          )}
-            <p>
-</p>
+            )}
             {consumptionData ? (
                 <div>
                     <table className="PriceTable">

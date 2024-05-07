@@ -5,6 +5,7 @@ import { Chart } from "chart.js/auto";
 import { useNavigate } from 'react-router-dom';
 
 const Charts = () => {
+  // State variables for showing/hiding different charts
   const [showInsideTemp, setShowInsideTemp] = useState(false);
   const [showInsideHumidity, setShowInsideHumidity] = useState(false);
   const [showInsideAirPressure, setShowInsideAirPressure] = useState(false);
@@ -16,24 +17,26 @@ const Charts = () => {
   const [showOutsideAirPressure, setShowOutsideAirPressure] = useState(false);
   const [showUVI, setShowUVI] = useState(false);
 
+  // State variable for showing/hiding info modal
   const [isInfoVisible, setIsInfoVisible] = useState(false);
 
+  // Function to toggle info modal visibility
   const toggleInfo = () => {
     setIsInfoVisible(!isInfoVisible);
   };
 
-
+  // State variable for storing sensor data
   const [chartData, setChartData] = useState(null);
+
+  // React router navigation hook
   const navigate = useNavigate();
  
+  // Fetch sensor data from backend API
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch sensor data from backend API
         const serverUrl = process.env.REACT_APP_SERVER_URL;
-        //const serverPort = process.env.REACT_APP_SERVER_PORT;
-        const response = await fetch(
-          `${serverUrl}/get20data`);
+        const response = await fetch(`${serverUrl}/get20data`);
         const data = await response.json();
         setChartData(data);
       } catch (error) {
@@ -44,7 +47,10 @@ const Charts = () => {
     fetchData();
   }, []);
 
+  // State variable for storing weather forecast data
   const [weatherChartData, setWeatherChartData] = useState(null);
+
+  // Fetch weather forecast data from backend API
   useEffect(() => {
     const fetchWeatherChartData = async () => {
       try {
@@ -59,8 +65,7 @@ const Charts = () => {
     fetchWeatherChartData();
   }, []);
 
-
-
+  // Chart options
   const options = {
     scales: {
       x: {
@@ -84,13 +89,10 @@ const Charts = () => {
           <span className="close" onClick={toggleInfo}>&times;</span>
           <div className="info-text">  
 
-          <p> Webapp is made by students of Oulu University of Applied Sciences.<br></br>This is company-oriented project made with company called Haltian. <br></br> 
-           We made a web application that measures different values from sensors that Haltian provided. <br></br> 
-           You can browse collected data from pages, that are found in the navigation bar. <br></br>
-
+          <p> Here, various charts are displayed.<br></br>
+          Indoor data comes from sensors.<br></br> 
+          Outdoor data comes from a weather forecasting service (API).  <br></br> 
            </p>
-
-
                 </div>
               </div>
             </div>
