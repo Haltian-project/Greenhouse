@@ -5,6 +5,7 @@ import { FaThermometer, FaTint, FaWind, FaSmog, FaLightbulb, FaRegLightbulb,
   FaCloudSunRain, FaBolt, FaChartLine, FaSun, FaExclamation, 
   FaPlug} from 'react-icons/fa'; // Importing icons from FontAwesome library
 
+
 const Home = () => {
   // State for sensor data and its limits
   const [sensorData, setSensorData] = useState(null);
@@ -76,6 +77,43 @@ const Home = () => {
     fetchData();
   }, []);
 
+  //Fetch price data
+  const [priceData, setPriceData] = useState(null);
+  useEffect(() => {
+    const fetchPriceData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/price`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const responseData = await response.json();
+        const data = responseData.data;
+        console.log('Received data:', data); // Test if data is sent to console
+  
+        if (Array.isArray(data) && data.length > 0) {
+          const sortedData = data.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
+          const latestPrice = sortedData[0];
+          // MWH to KWH
+          const pricePerKwh = latestPrice.value / 1000 * 100 ;
+          const pricePerKwhWithVAT = pricePerKwh * 1.24; // 
+          setPriceData({ ...latestPrice, value: pricePerKwh, pricePerKwhWithVAT });
+        } else {
+          console.error('Invalid price data format:', responseData);
+        }
+      } catch (error) {
+        console.error('Error fetching price data:', error);
+      }
+    };
+  
+    fetchPriceData();
+  }, []);
+  
+  
+  
+  
+  
+    
+
   // Fetch weather data
   const [weatherData, setWeatherData] = useState(null);
   useEffect(() => {
@@ -106,7 +144,7 @@ const Home = () => {
       <button className="info-button" onClick={toggleInfo}>
         Info
       </button>
-       {/* Info Modal */}
+       
        {isInfoVisible && (
         <div className="info-modal">
           <div className="info-content">
@@ -139,7 +177,42 @@ const Home = () => {
 
       <h1>Latest data:</h1> 
 
+      <h3>Electricity price & consumption at the moment</h3>
+         <div className="Home-data-container">
+        <div className="Home-data-item-1">
+          
+        <button>
+      <Link to="/price">
+        <FaBolt size={30} />
+        <p>
+  Electricity price at the moment: {priceData ? priceData.value : 'Loading... '  }
+  {priceData && priceData.pricePerKwhWithVAT && (
+    <span>, including VAT: {priceData.pricePerKwhWithVAT} cent / kWh</span>
+  )}
+</p>
+      </Link>
+    </button>
+          
+  </div>
+        <div className="Home-data-item-1">
+        <button>
+      <Link to="/price">
+        <FaPlug size={30} />
+        <p>Electricity consumption at the moment: {priceData ? priceData.price : 'Loading...'} </p>
+      </Link>
+    </button>
+          
+  </div>
+</div>
+
+{sensorData && (
+  <div className="Home-data-container-1">
+    {/* Existing sensor data items */}
+  </div>
+)}
+
       <h2>Inside:</h2>
+
       {sensorData && (
         <div className="Home-data-container">
           <div className={`Home-data-item ${isTempLimits ? '' : 'data-out-of-limits'}`}>
