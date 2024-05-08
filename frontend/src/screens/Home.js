@@ -47,6 +47,77 @@ const Home = () => {
     setIsLightIntensityLimits(data.lghtint >= limits.lightIntensityMin && data.lghtint <= limits.lightIntensityMax);
   }, [limits]);
   
+      //Fetch price data
+  const [priceData, setPriceData] = useState({});
+  useEffect(() => {
+    const fetchPriceData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/price`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const responseData = await response.json();
+        
+        const data = responseData.data;
+       
+  
+        if (Array.isArray(data) && data.length > 0) {
+          const sortedData = data.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
+          const latestPrice = sortedData[0];
+          
+          console.log('priceData.data:', priceData.data);
+
+          // MWH to KWH
+          const pricePerKwh = (latestPrice.value / 1000 * 100).toFixed(2);
+          const pricePerKwhWithVAT = (pricePerKwh * 1.24).toFixed(2);
+          
+          setPriceData({ ...latestPrice, value: parseFloat(pricePerKwh), pricePerKwhWithVAT: parseFloat(pricePerKwhWithVAT) });
+        } else {
+          console.error('Invalid price data format:', responseData);
+        }
+      } catch (error) {
+        console.error('Error fetching price data:', error);
+      }
+    };
+  
+    fetchPriceData();
+  }, []);
+  
+  // Fetch consumption data
+  const [latestConsumption, setLatestConsumption] = useState({});
+
+  useEffect(() => {
+      console.log("UseEffect hook called");
+      const fetchConsumptionData = async () => {
+          try {
+              const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/consumption`);
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              const responseData = await response.json();
+              const data = responseData.data;
+              console.log('Received consumption data:', data); // Test if data is sent to console
+  
+              if (Array.isArray(data) && data.length > 0) {
+                  const consumptionData = [...data].sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
+                  const latestConsumption = consumptionData[0];
+                  // Conversion from MWh to kWh
+                  const consumptionPerKwh = latestConsumption.value;
+                  setLatestConsumption({ ...latestConsumption, value: consumptionPerKwh });
+              } else {
+                  console.error('Invalid consumption data format:', responseData);
+              }
+          } catch (error) {
+              console.error('Error fetching consumption data:', error);
+          }
+      };
+  
+      fetchConsumptionData();
+  }, []);
+  
+
+
+
   // Fetch sensor data limits from backend API
   useEffect(() => {
     const fetchLimits = async () => {
@@ -77,37 +148,8 @@ const Home = () => {
     fetchData();
   }, []);
 
-  //Fetch price data
-  const [priceData, setPriceData] = useState(null);
-  useEffect(() => {
-    const fetchPriceData = async () => {
-      try {
-        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/price`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const responseData = await response.json();
-        const data = responseData.data;
-        console.log('Received data:', data); // Test if data is sent to console
-  
-        if (Array.isArray(data) && data.length > 0) {
-          const sortedData = data.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
-          const latestPrice = sortedData[0];
-          // MWH to KWH
-          const pricePerKwh = latestPrice.value / 1000 * 100 ;
-          const pricePerKwhWithVAT = pricePerKwh * 1.24; // 
-          setPriceData({ ...latestPrice, value: pricePerKwh, pricePerKwhWithVAT });
-        } else {
-          console.error('Invalid price data format:', responseData);
-        }
-      } catch (error) {
-        console.error('Error fetching price data:', error);
-      }
-    };
-  
-    fetchPriceData();
-  }, []);
-  
+
+
   
   
   
@@ -177,39 +219,9 @@ const Home = () => {
 
       <h1>Latest data:</h1> 
 
-      <h3>Electricity price & consumption at the moment</h3>
-         <div className="Home-data-container">
-        <div className="Home-data-item-1">
-          
-        <button>
-      <Link to="/price">
-        <FaBolt size={30} />
-        <p>
-  Electricity price at the moment: {priceData ? priceData.value : 'Loading... '  }
-  {priceData && priceData.pricePerKwhWithVAT && (
-    <span>, including VAT: {priceData.pricePerKwhWithVAT} cent / kWh</span>
-  )}
-</p>
-      </Link>
-    </button>
-          
-  </div>
-        <div className="Home-data-item-1">
-        <button>
-      <Link to="/price">
-        <FaPlug size={30} />
-        <p>Electricity consumption at the moment: {priceData ? priceData.price : 'Loading...'} </p>
-      </Link>
-    </button>
-          
-  </div>
-</div>
+      
 
-{sensorData && (
-  <div className="Home-data-container-1">
-    {/* Existing sensor data items */}
-  </div>
-)}
+
 
       <h2>Inside:</h2>
 
@@ -372,6 +384,30 @@ const Home = () => {
           </button>
         </div>
       </div>
+
+      <h3>Electricity price & consumption at the moment</h3>
+         <div className="Home-data-container-1">
+        <div className="Home-data-item-1">
+          
+        <button2>
+      <Link to="/price">
+        <FaBolt size={30} />
+        <div>Electricity price at the moment including VAT: 
+        {priceData && priceData.pricePerKwhWithVAT ? `${priceData.pricePerKwhWithVAT} cent / kWh` : 'Loading...'}</div>
+           
+        
+      </Link>
+    </button2>        
+  </div>
+        <div className="Home-data-item-1">
+        <button2>
+      <Link to="/consumption">
+        <FaPlug size={30}/>
+        <div>Electricity consumption at the moment: {latestConsumption ? `${latestConsumption.value} kWh` : 'Loading...'} </div>
+      </Link>
+    </button2>          
+  </div>
+</div>
     </div>
   );
 };
