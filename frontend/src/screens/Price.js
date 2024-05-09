@@ -80,47 +80,48 @@ const Price = () => {
           }
         }
       };
-    return (
+      return (
         <div className="PriceContainer">
             <button1 onClick={() => navigate('/')}>Back To Home</button1>
             <button className="info-button" onClick={toggleInfo}>
                 Info
             </button>
-                {/* Info Modal */}
-       {isInfoVisible && (
-        <div className="info-modal">
-          <div className="info-content">
-          <span className="close" onClick={toggleInfo}>&times;</span>
-          <div className="info-text">  
-
-          <p>In this page you are able to seek SPOT-price.  </p>
+            {/* Info Modal */}
+            {isInfoVisible && (
+                <div className="info-modal">
+                    <div className="info-content">
+                        <span className="close" onClick={toggleInfo}>&times;</span>
+                        <div className="info-text">
+                            <p>In this page you are able to seek SPOT-price.</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          )}
+            )}
             <h2>Electricity price</h2>
             {priceData ? (
                 <div>
-                    <table className="PriceTable">
-                        <thead>
-                            <tr>
-                                <th>Time</th>
-                                <th>Price (cents/KWh)</th>
-                                <th>Price with VAT 24 % (cents/KWh)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {sortedData.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{formatDate2(item.startTime)}</td>
-                                    <td>{formatPrice(item.value)}</td>
-                                    <td>{formatPriceWithVAT(item.value)}</td>
+                    <div className="PriceTableWrapper">
+                        <table className="PriceTable">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Price (cents/KWh)</th>
+                                    <th>Price with VAT 24 % (cents/KWh)</th>
                                 </tr>
-                            )).reverse()} 
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {sortedData.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{formatDate2(item.startTime)}</td>
+                                        <td>{formatPrice(item.value)}</td>
+                                        <td>{formatPriceWithVAT(item.value)}</td>
+                                    </tr>
+                                )).reverse()}
+                            </tbody>
+                        </table>
+                    </div>
                     <h2>Electricity price chart:</h2>
-                    <Line data={chartData}  options={options} />
+                    <Line data={chartData} options={options} />
                 </div>
             ) : (
                 <p>Loading...</p>

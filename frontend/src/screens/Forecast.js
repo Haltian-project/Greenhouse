@@ -81,17 +81,17 @@ const Forecast = () => {
       <button className="info-button" onClick={toggleInfo}>
         Info
       </button>
-       {/* Info Modal */}
-       {isInfoVisible && (
+      {/* Info Modal */}
+      {isInfoVisible && (
         <div className="info-modal">
           <div className="info-content">
-          <span className="close" onClick={toggleInfo}>&times;</span>
-          <div className="info-text">  
-          <p>In this page you are able to seek real-time forecast</p>
-                </div>
-              </div>
+            <span className="close" onClick={toggleInfo}>&times;</span>
+            <div className="info-text">  
+              <p>In this page you are able to seek real-time forecast</p>
             </div>
-          )}
+          </div>
+        </div>
+      )}
       <button1 onClick={() => navigate('/')}>Back To Home</button1>
       <h2 className="forecast-heading">Weather Forecast</h2>
       {forecastData ? (
@@ -105,28 +105,30 @@ const Forecast = () => {
             <p>City information not available</p>
           )}
           <h3 className="forecast-subheading">Forecast:</h3>
-          <table className="forecast-table">
-            <thead>
-              <tr>
-                <th>Time</th>
-                <th>Temperature (°C)</th>
-                <th>Humidity (%)</th>
-                <th>Pressure (hPa)</th>
-                <th>Weather</th>
-              </tr>
-            </thead>
-            <tbody>
-              {forecastData.list && forecastData.list.map((item, index) => (
-                <tr key={index} className="forecast-item">
-                  <td>{formatDate(item.dt_txt)}</td>
-                  <td>{item.main.temp} °C</td>
-                  <td>{item.main.humidity}%</td>
-                  <td>{item.main.pressure} hPa</td>
-                  <td>{item.weather[0].description}</td>
+          <div className="forecast-table-wrapper">
+            <table className="forecast-table">
+              <thead>
+                <tr>
+                  <th>Time</th>
+                  <th>Temperature (°C)</th>
+                  <th>Humidity (%)</th>
+                  <th>Pressure (hPa)</th>
+                  <th>Weather</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="forecast-table-body">
+                {forecastData.list && forecastData.list.map((item, index) => (
+                  <tr key={index} className="forecast-item">
+                    <td>{formatDate(item.dt_txt)}</td>
+                    <td>{item.main.temp} °C</td>
+                    <td>{item.main.humidity}%</td>
+                    <td>{item.main.pressure} hPa</td>
+                    <td>{item.weather[0].description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <h3 className="forecast-subheading">Weather forecast chart:</h3>
           <Line data={chartData} options={options} />
         </div>
@@ -135,6 +137,7 @@ const Forecast = () => {
       )}
     </div>
   );
+  
 };
 
 export default Forecast;

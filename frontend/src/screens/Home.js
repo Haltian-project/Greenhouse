@@ -65,7 +65,7 @@ const Home = () => {
           const sortedData = data.sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
           const latestPrice = sortedData[0];
           
-          console.log('priceData.data:', priceData.data);
+            console.log('priceData.data:', priceData.data);
 
           // MWH to KWH
           const pricePerKwh = (latestPrice.value / 1000 * 100).toFixed(2);
@@ -393,7 +393,8 @@ const Home = () => {
       <Link to="/price">
         <FaBolt size={30} />
         <div>Electricity price at the moment including VAT: 
-        {priceData && priceData.pricePerKwhWithVAT ? `${priceData.pricePerKwhWithVAT} cent / kWh` : 'Loading...'}</div>
+        {priceData && priceData.pricePerKwhWithVAT ? `${priceData.pricePerKwhWithVAT} cent / kWh`
+         : 'Loading...'}</div>
            
         
       </Link>
@@ -403,7 +404,8 @@ const Home = () => {
         <button2>
       <Link to="/consumption">
         <FaPlug size={30}/>
-        <div>Electricity consumption at the moment: {latestConsumption ? `${latestConsumption.value} kWh` : 'Loading...'} </div>
+        <div>Electricity consumption at the moment: {latestConsumption ? `${latestConsumption.value} kWh` 
+          : 'Loading...'} </div>
       </Link>
     </button2>          
   </div>

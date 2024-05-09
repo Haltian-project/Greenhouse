@@ -236,6 +236,13 @@ button:hover {
   border-collapse: collapse;
 }
 
+.forecast-table-wrapper {
+  max-height: 800px; /* Määritä korkeus, jotta taulukko rullautuu, kun se on täynnä */
+  overflow-y: auto; /* Tee taulukosta rullattava */
+}
+
+
+
 .forecast-table th,
 .forecast-table td {
   padding: 8px;
@@ -272,6 +279,14 @@ button:hover {
 .PriceTable td {
   text-align: center;
 }
+
+.PriceTableWrapper {
+    max-height: 600px; /* Set the height to make the table scrollable */
+    overflow-y: auto; /* Make the table scrollable */
+}
+
+
+
 /* logtable.css */
 
 .log-table {
