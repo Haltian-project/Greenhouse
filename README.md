@@ -91,6 +91,11 @@ Create a .env file in the server directory to store your API keys and other sens
    MQTT_BROKER_URL=your_mqtt_broker_url_here
    MQTT_TOPIC=your_mqtt_topic_here
    ```
+https://developer-data.fingrid.fi/
+https://openweathermap.org/
+www.weatherapi.com/
+
+
 Create a .env file in the frontend directory to define the server URL:
 ```sh
 REACT_APP_SERVER_URL=http://localhost:your_port_number
