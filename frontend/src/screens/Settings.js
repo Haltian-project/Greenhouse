@@ -16,8 +16,7 @@ const Settings = () => {
     lightMax: 0,
     lightIntensityMin: 0,
     lightIntensityMax: 0,
-    electricityPriceMax: 0, // Added electricityPriceMax field
-    consumptionMax: 0, // Added consumptionMax field
+    
   });
   const navigate = useNavigate();
   useEffect(() => {

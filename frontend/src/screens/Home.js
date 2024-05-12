@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 import { FaThermometer, FaTint, FaWind, FaSmog, FaLightbulb, FaRegLightbulb, 
   FaCloudSunRain, FaBolt, FaChartLine, FaSun, FaExclamation, 
-  FaPlug} from 'react-icons/fa'; // Importing icons from FontAwesome library
+  FaPlug, FaSyncAlt} from 'react-icons/fa'; // Importing icons from FontAwesome library
 
 
 const Home = () => {
@@ -21,6 +21,11 @@ const Home = () => {
     setIsInfoVisible(!isInfoVisible);
   };
   
+  const refreshPage = () => {
+    window.location.reload();
+  };
+
+
   // State for sensor data limits
   const [limits, setLimits] = useState({
     tempMin: 0,
@@ -410,6 +415,10 @@ const Home = () => {
     </button2>          
   </div>
 </div>
+<button onClick={() => window.location.reload()} className="nav-link refresh-button">
+          <FaSyncAlt/> Refresh
+        </button>    
+
     </div>
   );
 };
